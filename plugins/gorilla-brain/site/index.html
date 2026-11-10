@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <meta name="description" content="Segundo cerebro visual generado por Gorilla Brain.">
+    <title>{{SITE_TITLE}}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#workspace">Saltar al contenido</a>
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Inicio de Gorilla Brain">
+        <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 4a12 12 0 0 0-7.6 21.3c1.3 1.1 2.1 2.3 2.3 3.7h10.6c.2-1.4 1-2.6 2.3-3.7A12 12 0 0 0 20 4Z"/><path d="M15 33h10M17 36h6"/></svg>
+        <span><strong id="site-title">Gorilla Brain</strong><small>Knowledge workspace</small></span>
+      </a>
+      <div class="view-switch" aria-label="Vista principal">
+        <button class="view-button is-active" data-view="notes" type="button">Notas</button>
+        <button class="view-button" data-view="graph2d" type="button">Mapa 2D</button>
+        <button class="view-button" data-view="graph3d" type="button">Mapa 3D</button>
+      </div>
+      <button id="mobile-nav" class="icon-button mobile-only" type="button" aria-label="Abrir navegación" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </header>
+
+    <main id="workspace" class="workspace">
+      <aside id="navigation" class="navigation" aria-label="Navegación del conocimiento">
+        <label class="search-box">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+          <span class="sr-only">Buscar</span>
+          <input id="search" type="search" placeholder="Buscar conocimiento…" autocomplete="off">
+          <kbd>/</kbd>
+        </label>
+        <div id="metrics" class="metrics" aria-label="Métricas del repositorio"></div>
+        <div class="section-heading">
+          <span>Explorador</span>
+          <button id="expand-tree" class="text-button" type="button">Expandir</button>
+        </div>
+        <nav id="tree" class="tree"></nav>
+      </aside>
+
+      <section id="notes-view" class="content-view is-active" aria-label="Nota seleccionada">
+        <article id="note" class="note"></article>
+      </section>
+
+      <section id="graph-view" class="content-view graph-view" aria-label="Mapa del conocimiento">
+        <div class="graph-toolbar">
+          <div>
+            <strong id="graph-title">Mapa del conocimiento</strong>
+            <span id="graph-hint">Arrastra para mover · rueda para ampliar · selecciona un nodo</span>
+          </div>
+          <button id="reset-graph" class="secondary-button" type="button">Centrar mapa</button>
+        </div>
+        <canvas id="graph" tabindex="0" aria-label="Grafo interactivo del conocimiento"></canvas>
+        <p class="canvas-fallback">El mapa es una vista complementaria. Toda la información sigue disponible en el explorador y en la búsqueda.</p>
+      </section>
+
+      <aside id="context" class="context-panel" aria-label="Contexto de la nota">
+        <div id="note-meta"></div>
+        <section>
+          <h2>Enlaces salientes</h2>
+          <div id="outgoing" class="link-list"></div>
+        </section>
+        <section>
+          <h2>Backlinks</h2>
+          <div id="backlinks" class="link-list"></div>
+        </section>
+        <section id="integrity-section">
+          <h2>Integridad</h2>
+          <div id="integrity"></div>
+        </section>
+      </aside>
+    </main>
+
+    <div id="status" class="status" role="status" aria-live="polite"></div>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

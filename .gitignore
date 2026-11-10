@@ -11,4 +11,6 @@ private/
 clients/
 customer-data/
 artifacts/
+site-dist/
+site-hosting/
 

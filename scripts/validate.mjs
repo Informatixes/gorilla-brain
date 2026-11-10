@@ -73,7 +73,7 @@ const forbidden = [
 ];
 
 for (const filePath of publicFiles) {
-  if (!/\.(md|json|mjs|yaml|yml|txt)$/i.test(filePath)) continue;
+  if (!/\.(md|json|mjs|js|css|html|yaml|yml|txt)$/i.test(filePath)) continue;
   const content = await readFile(filePath, "utf8");
   for (const pattern of forbidden) {
     pattern.lastIndex = 0;

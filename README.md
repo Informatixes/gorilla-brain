@@ -13,6 +13,9 @@ Desarrollado por [Innown](https://innown.es).
 - Diseña especialistas y un coordinador solo cuando existe contexto suficiente.
 - Usa el segundo cerebro para resolver trabajo real sin volcar todo el repositorio en cada conversación.
 - Audita contradicciones, fuentes, permisos y vigencia.
+- Genera un Site visual tipo Obsidian desde cualquier repositorio Markdown.
+- Resuelve wikilinks, backlinks, enlaces Markdown, huérfanas y enlaces rotos.
+- Incluye búsqueda, explorador y mapas interactivos 2D y 3D sin dependencias de frontend.
 
 ## Instalación desde GitHub
 
@@ -49,8 +52,30 @@ plugins/gorilla-brain/plugin.json      Manifiesto portable
 plugins/gorilla-brain/skills/          Flujos reutilizables
 plugins/gorilla-brain/templates/       Plantillas del segundo cerebro
 plugins/gorilla-brain/references/      Metodología y modelo de conocimiento
+plugins/gorilla-brain/site/            Interfaz web autocontenida
+plugins/gorilla-brain/scripts/         Compilador Markdown → Site
+demo-vault/                             Conocimiento ficticio para pruebas
 scripts/validate.mjs                   Validación sin dependencias
 ```
+
+## Generar el Site de un repositorio
+
+Desde la carpeta `plugins/gorilla-brain`:
+
+```text
+node scripts/build-site.mjs --vault <ruta-al-repositorio> --out <ruta-de-salida> --title "Mi segundo cerebro"
+```
+
+El compilador lee únicamente archivos `.md`, interpreta frontmatter básico, `[[wikilinks]]`, aliases y enlaces Markdown relativos. Produce una carpeta estática con `index.html`, estilos, aplicación y `knowledge.json`. El repositorio original no se modifica.
+
+Para ejecutar la demostración incluida:
+
+```text
+npm run build:demo
+python -m http.server 4173 --directory site-dist
+```
+
+La publicación debe ser privada por defecto. La carpeta compilada es una vista: las correcciones se realizan en Markdown y después se regenera.
 
 ## Principios
 
@@ -71,5 +96,5 @@ npm test
 
 ## Estado
 
-Versión inicial pública `0.1.0`. Es una base funcional de skills; no incluye todavía servidor MCP ni sincronización automática con Google Drive o Microsoft 365.
+Versión pública `0.2.0`. Incluye el generador de Site y siete skills. No incluye todavía servidor MCP ni sincronización automática con Google Drive o Microsoft 365: esas integraciones requieren configurar identidad, permisos y fuente autorizada en cada implantación.
 
