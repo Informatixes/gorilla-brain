@@ -20,6 +20,7 @@
       </a>
       <div class="view-switch" aria-label="Vista principal">
         <button class="view-button is-active" data-view="notes" type="button">Notas</button>
+        <button class="view-button" data-view="ask" type="button">Consultar</button>
         <button class="view-button" data-view="graph2d" type="button">Mapa 2D</button>
         <button class="view-button" data-view="graph3d" type="button">Mapa 3D</button>
       </div>
@@ -62,6 +63,32 @@
         </div>
         <canvas id="graph" tabindex="0" aria-label="Grafo interactivo del conocimiento"></canvas>
         <p class="canvas-fallback">El mapa es una vista complementaria. Toda la información sigue disponible en el explorador y en la búsqueda.</p>
+      </section>
+
+      <section id="ask-view" class="content-view ask-view" aria-label="Consultar el segundo cerebro">
+        <div class="ask-shell">
+          <div class="ask-heading">
+            <span class="ask-mark" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 3a8 8 0 0 0-5 14.2c.9.7 1.4 1.5 1.5 2.5h7c.1-1 .7-1.8 1.5-2.5A8 8 0 0 0 12 3Z"/><path d="M9 22h6"/></svg>
+            </span>
+            <div><p class="eyebrow">Consulta verificable</p><h1>Pregunta a tu segundo cerebro</h1><p>Recupera notas y fragmentos exactos. No completa huecos con información externa.</p></div>
+          </div>
+          <form id="ask-form" class="ask-form">
+            <label for="ask-input">¿Qué necesitas localizar?</label>
+            <div class="ask-input-row">
+              <input id="ask-input" type="search" placeholder="Ej. ¿Dónde se decidió la fuente de verdad?" autocomplete="off" required>
+              <button type="submit">Consultar</button>
+            </div>
+          </form>
+          <div class="query-suggestions" aria-label="Consultas de ejemplo">
+            <button type="button" data-query="decisiones y fuentes del proyecto">Decisiones del proyecto</button>
+            <button type="button" data-query="cómo capturar conocimiento">Proceso de captura</button>
+            <button type="button" data-query="qué agente coordina especialistas">Agente coordinador</button>
+          </div>
+          <div id="ask-results" class="ask-results" aria-live="polite">
+            <div class="ask-empty"><strong>Consulta las notas conectadas</strong><span>La respuesta mostrará siempre su archivo de origen.</span></div>
+          </div>
+        </div>
       </section>
 
       <aside id="context" class="context-panel" aria-label="Contexto de la nota">

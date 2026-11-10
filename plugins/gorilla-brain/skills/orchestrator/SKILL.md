@@ -46,6 +46,8 @@ Cada fase admite como máximo una ronda conjunta de aclaraciones.
 - Nueva información o documentos: `knowledge-capture`.
 - Trabajo real que requiere contexto: `brain-operator`.
 - Diseño o revisión de especialistas: `agent-designer`.
+- Creación de un especialista que consulte el cerebro: `librarian-agent-factory`.
+- Consulta delegada con fuentes: `brain-librarian`.
 - Contradicciones, vigencia o calidad: `brain-auditor`.
 
 No simules que otro especialista ha trabajado: invoca el flujo disponible o realiza el trabajo siguiendo sus reglas.

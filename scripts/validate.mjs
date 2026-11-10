@@ -56,6 +56,7 @@ for (const directory of skillDirectories) {
 async function collectFiles(directory) {
   const result = [];
   for (const entry of await readdir(directory, { withFileTypes: true })) {
+    if (entry.isDirectory() && [".git", "node_modules", "artifacts", "site-dist", "site-hosting"].includes(entry.name)) continue;
     const fullPath = path.join(directory, entry.name);
     if (entry.isDirectory()) result.push(...await collectFiles(fullPath));
     else result.push(fullPath);

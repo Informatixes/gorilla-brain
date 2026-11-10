@@ -20,6 +20,10 @@ const elements = {
   backlinks: document.querySelector("#backlinks"),
   integrity: document.querySelector("#integrity"),
   notesView: document.querySelector("#notes-view"),
+  askView: document.querySelector("#ask-view"),
+  askForm: document.querySelector("#ask-form"),
+  askInput: document.querySelector("#ask-input"),
+  askResults: document.querySelector("#ask-results"),
   graphView: document.querySelector("#graph-view"),
   graphTitle: document.querySelector("#graph-title"),
   canvas: document.querySelector("#graph"),
@@ -147,6 +151,50 @@ function groupNotes(notes) {
   }, {});
 }
 
+const queryStopwords = new Set(["a", "al", "algo", "como", "con", "cual", "de", "del", "el", "en", "es", "esta", "este", "la", "las", "lo", "los", "o", "para", "por", "que", "se", "sin", "su", "sus", "un", "una", "y"]);
+
+function normalizeQuery(value) {
+  return String(value).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+}
+
+function queryTerms(value) {
+  return [...new Set(normalizeQuery(value).split(/[^a-z0-9]+/).filter((term) => term.length > 1 && !queryStopwords.has(term)))];
+}
+
+function occurrences(value, term) {
+  let count = 0, start = 0;
+  while ((start = value.indexOf(term, start)) !== -1) { count += 1; start += term.length; }
+  return count;
+}
+
+function plainText(value) {
+  return value.replace(/^#{1,6}\s+/gm, "").replace(/\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g, (_, target, alias) => alias || target).replace(/[*_`>|]/g, "").replace(/\s+/g, " ").trim();
+}
+
+function queryNotes(query) {
+  const terms = queryTerms(query);
+  if (!terms.length) return [];
+  const phrase = normalizeQuery(query);
+  return [...state.notes.values()].map((note) => {
+    const fields = { title: normalizeQuery(note.title), tags: normalizeQuery(note.tags.join(" ")), path: normalizeQuery(note.path), body: normalizeQuery(note.body) };
+    let score = terms.reduce((total, term) => total + occurrences(fields.title, term) * 10 + occurrences(fields.tags, term) * 6 + occurrences(fields.path, term) * 4 + occurrences(fields.body, term), 0);
+    if (fields.title.includes(phrase)) score += 20;
+    const blocks = note.body.split(/\r?\n\s*\r?\n/).map(plainText).filter((block) => block.length > 30);
+    const snippet = blocks.sort((a, b) => terms.reduce((sum, term) => sum + occurrences(normalizeQuery(b), term), 0) - terms.reduce((sum, term) => sum + occurrences(normalizeQuery(a), term), 0))[0] || plainText(note.body);
+    return { note, score, snippet: snippet.length > 260 ? `${snippet.slice(0, 257).trim()}…` : snippet };
+  }).filter((result) => result.score > 0).sort((a, b) => b.score - a.score || a.note.title.localeCompare(b.note.title));
+}
+
+function runQuery(query) {
+  const clean = query.trim();
+  const results = queryNotes(clean);
+  if (!results.length) {
+    elements.askResults.innerHTML = `<div class="ask-empty"><strong>No hay evidencia suficiente</strong><span>El repositorio no contiene notas relacionadas con “${escapeHtml(clean)}”.</span></div>`;
+    return;
+  }
+  elements.askResults.innerHTML = `<div class="ask-summary"><strong>${results.length} notas relacionadas</strong><span>Ordenadas por relevancia textual</span></div>${results.slice(0, 8).map(({ note, score, snippet }) => `<button class="ask-result" data-note="${escapeAttribute(note.id)}" type="button">${icon(noteIcon(note))}<span class="ask-result-copy"><span class="ask-result-title">${escapeHtml(note.title)}</span><span class="ask-result-snippet">${escapeHtml(snippet)}</span><span class="ask-result-source">${escapeHtml(note.path)}</span></span><span class="ask-score">${score}</span></button>`).join("")}`;
+}
+
 function renderMetrics() {
   const { notes, links, brokenLinks, orphans } = state.data.metrics;
   elements.metrics.innerHTML = [
@@ -204,12 +252,15 @@ function selectNote(id, switchView = true) {
 function setView(view) {
   state.view = view;
   const graph = view.startsWith("graph");
+  const ask = view === "ask";
   state.graph.mode = view === "graph3d" ? "3d" : "2d";
-  elements.notesView.classList.toggle("is-active", !graph);
+  elements.notesView.classList.toggle("is-active", !graph && !ask);
+  elements.askView.classList.toggle("is-active", ask);
   elements.graphView.classList.toggle("is-active", graph);
   document.querySelectorAll(".view-button").forEach((button) => button.classList.toggle("is-active", button.dataset.view === view));
   elements.graphTitle.textContent = state.graph.mode === "3d" ? "Mapa 3D del conocimiento" : "Mapa 2D del conocimiento";
   if (graph) requestAnimationFrame(() => { resizeCanvas(); drawGraph(); });
+  if (ask) requestAnimationFrame(() => elements.askInput.focus());
 }
 
 function buildGraphNodes() {
@@ -327,6 +378,8 @@ function bindEvents() {
     elements.mobileNav.setAttribute("aria-expanded", String(open));
   });
   document.querySelector("#reset-graph").addEventListener("click", resetGraph);
+  elements.askForm.addEventListener("submit", (event) => { event.preventDefault(); runQuery(elements.askInput.value); });
+  document.querySelectorAll("[data-query]").forEach((button) => button.addEventListener("click", () => { elements.askInput.value = button.dataset.query; runQuery(button.dataset.query); }));
   window.addEventListener("resize", () => { if (state.view.startsWith("graph")) { resizeCanvas(); drawGraph(); } });
 
   elements.canvas.addEventListener("pointerdown", (event) => {

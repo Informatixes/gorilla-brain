@@ -1,11 +1,11 @@
 {
   "name": "gorilla-brain-repository",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "private": true,
   "description": "Repositorio de distribución y validación del plugin Gorilla Brain.",
   "scripts": {
     "build:demo": "node plugins/gorilla-brain/scripts/build-site.mjs --vault demo-vault --out site-dist --title \"Gorilla Brain Demo\"",
-    "test": "node scripts/validate.mjs && node --check plugins/gorilla-brain/scripts/build-site.mjs && node --check plugins/gorilla-brain/site/app.js && npm run build:demo && node scripts/validate-build.mjs"
+    "test": "node scripts/validate.mjs && node --check plugins/gorilla-brain/scripts/build-site.mjs && node --check plugins/gorilla-brain/scripts/query-brain.mjs && node --check plugins/gorilla-brain/site/app.js && npm run build:demo && node scripts/validate-build.mjs && node scripts/test-query.mjs"
   },
   "engines": {
     "node": ">=20"

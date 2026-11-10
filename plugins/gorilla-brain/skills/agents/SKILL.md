@@ -24,6 +24,8 @@ No crees agentes porque suenen útiles. Créelos cuando exista un trabajo repeti
 5. Crea un coordinador solo cuando existan al menos dos especialistas con rutas distintas o dependencias reales.
 6. Usa `../../templates/AGENT.md` y actualiza `agents/AGENTS.md`.
 
+Cuando el caso de uso sea consultar el repositorio, no diseñes otro agente desde cero: deriva a `librarian-agent-factory`, que instancia el Bibliotecario y valida sus límites de solo lectura.
+
 ## Coordinación
 
 El coordinador conoce el catálogo, selecciona el especialista adecuado, transmite el contexto mínimo y consolida resultados. No debe duplicar el trabajo de todos ni conceder permisos adicionales.

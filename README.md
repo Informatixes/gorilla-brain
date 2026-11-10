@@ -17,6 +17,8 @@ Desarrollado por [Innown](https://innown.es).
 - Resuelve wikilinks, backlinks, enlaces Markdown, huérfanas y enlaces rotos.
 - Incluye búsqueda, explorador y mapas interactivos 2D y 3D sin dependencias de frontend.
 - Presenta cada nota con pestaña, ruta, propiedades, icono semántico y tablas Markdown.
+- Permite consultar el conocimiento desde el Site y abrir directamente cada evidencia.
+- Puede crear un especialista Bibliotecario para que el agente principal le delegue consultas con fuentes.
 
 ## Instalación desde GitHub
 
@@ -69,6 +71,16 @@ node scripts/build-site.mjs --vault <ruta-al-repositorio> --out <ruta-de-salida>
 
 El compilador lee únicamente archivos `.md`, interpreta frontmatter básico, `[[wikilinks]]`, aliases y enlaces Markdown relativos. Produce una carpeta estática con `index.html`, estilos, aplicación y `knowledge.json`. El repositorio original no se modifica.
 
+## Consultar el cerebro desde un agente
+
+El recuperador local ofrece resultados trazables sin enviar el repositorio a un servicio externo:
+
+```text
+node scripts/query-brain.mjs --vault <ruta-al-repositorio> --query "<pregunta>" --limit 8 --format markdown
+```
+
+La skill `librarian-agent-factory` puede crear `agents/BIBLIOTECARIO.md` en el repositorio del usuario. Cuando el entorno soporta subagentes, Gorilla Brain delega la recuperación; en otros entornos aplica el mismo flujo en la conversación actual y lo indica expresamente.
+
 Para ejecutar la demostración incluida:
 
 ```text
@@ -97,5 +109,5 @@ npm test
 
 ## Estado
 
-Versión pública `0.3.0`. Incluye el generador de Site, experiencia visual de notas y siete skills. No incluye todavía servidor MCP ni sincronización automática con Google Drive o Microsoft 365: esas integraciones requieren configurar identidad, permisos y fuente autorizada en cada implantación.
+Versión pública `0.4.0`. Incluye el generador de Site, consulta verificable, experiencia visual de notas y nueve skills. No incluye todavía servidor MCP ni sincronización automática con Google Drive o Microsoft 365: esas integraciones requieren configurar identidad, permisos y fuente autorizada en cada implantación.
 

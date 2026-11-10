@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.0 — 2026-11-10
+
+- Consulta funcional del segundo cerebro desde el Site, con resultados enlazados a sus notas fuente.
+- Recuperador determinista `query-brain.mjs` para consultas trazables desde terminal o agentes.
+- Skill `brain-librarian` para responder con evidencias, contradicciones y ausencias explícitas.
+- Skill `librarian-agent-factory` para que Gorilla Brain cree y registre un Bibliotecario adaptado al repositorio.
+- Plantilla del agente Bibliotecario con permisos de solo lectura y pruebas de aceptación.
+
 ## 0.3.0 — 2026-11-10
 
 - Experiencia de notas más cercana a Obsidian, conservando la identidad visual de Gorilla Brain.
