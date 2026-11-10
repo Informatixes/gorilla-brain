@@ -20,9 +20,10 @@ En Codex o ChatGPT Desktop, añade este repositorio como marketplace:
 
 ```text
 codex plugin marketplace add Informatixes/gorilla-brain
+codex plugin add gorilla-brain@gorilla-brain-marketplace
 ```
 
-Después instala **Gorilla Brain** desde el directorio de plugins y comienza con:
+También puedes instalar **Gorilla Brain** desde el directorio de plugins. Después comienza con:
 
 ```text
 Configura mi segundo cerebro con Gorilla Brain.
