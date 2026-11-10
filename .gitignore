@@ -3,6 +3,7 @@ node_modules/
 *.tar.gz
 .DS_Store
 Thumbs.db
+desktop.ini
 .env
 .env.*
 !.env.example
