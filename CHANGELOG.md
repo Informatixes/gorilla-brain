@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.5.0 — 2026-11-10
+
+- Inicializador de implantaciones con vista previa, creación explícita y protección contra sobrescritura.
+- Generador del agente Bibliotecario adaptado al ámbito y carpetas autorizadas de cada cliente.
+- MCP local de escritorio con búsqueda, lectura de notas y estado, todas en solo lectura.
+- Guía integral de piloto con privacidad, fuentes, Site, criterios de aceptación y recuperación.
+- Pruebas automáticas del circuito de alta, consulta trazable y protocolo MCP.
+
 ## 0.4.0 — 2026-11-10
 
 - Consulta funcional del segundo cerebro desde el Site, con resultados enlazados a sus notas fuente.

@@ -46,6 +46,7 @@ async function markdownFiles(directory) {
   const result = [];
   for (const entry of await readdir(directory, { withFileTypes: true })) {
     if ([".git", ".openai", "node_modules"].includes(entry.name)) continue;
+    if (entry.isSymbolicLink()) continue;
     const fullPath = path.join(directory, entry.name);
     if (entry.isDirectory()) result.push(...await markdownFiles(fullPath));
     else if (entry.name.toLowerCase().endsWith(".md")) result.push(fullPath);

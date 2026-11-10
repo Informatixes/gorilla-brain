@@ -14,6 +14,8 @@ Convierte la realidad del usuario en un repositorio operativo. El usuario descri
 3. Si hay documentos, identifica formatos y ubicaciones, pero no interpretes nombres de archivo como hechos.
 4. No leas ni publiques secretos. No muevas, borres o sobrescribas contenido existente.
 
+Si el repositorio está vacío, ejecuta primero `node ../../scripts/init-brain.mjs --root <ruta> --title <nombre>` para mostrar la vista previa. Ejecuta de nuevo con `--apply` solo después de comprobar la ruta. El inicializador se detiene si encuentra archivos esenciales existentes.
+
 ## Única entrevista inicial
 
 Formula juntas estas cinco preguntas y espera una sola respuesta conjunta:
@@ -43,6 +45,8 @@ Lee `../../references/methodology.md` y `../../references/knowledge-model.md`. D
 - `knowledge/DECISIONS.md`;
 - `agents/AGENTS.md`;
 - las carpetas mínimas que requiera el caso real.
+
+Cuando el usuario necesite consultar el repositorio desde el agente principal, ejecuta `node ../../scripts/create-librarian.mjs --root <ruta> --scope <ámbito> --folders <carpetas>` como vista previa y después con `--apply`. No amplíes las carpetas autorizadas por conveniencia.
 
 No copies ejemplos como si fueran datos del usuario. Conserva siempre la procedencia y separa:
 

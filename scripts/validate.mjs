@@ -32,6 +32,17 @@ if (typeof onboarding === "string") {
   check(await exists(path.join(pluginRoot, onboarding)), "plugin.json: onboardingSkill no existe");
 }
 
+const mcpPath = path.join(pluginRoot, "mcp.json");
+check(await exists(mcpPath), "Falta mcp.json");
+if (await exists(mcpPath)) {
+  const mcp = JSON.parse(await readFile(mcpPath, "utf8"));
+  check(mcp.$schema === "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json", "mcp.json: esquema incorrecto");
+  const localServer = mcp.mcpServers?.["gorilla-brain-local"];
+  check(localServer?.type === "stdio", "mcp.json: servidor local ausente");
+  check(Array.isArray(localServer?.args) && localServer.args.some((item) => item.includes("server/index.mjs")), "mcp.json: entrypoint ausente");
+  check(await exists(path.join(pluginRoot, "server", "index.mjs")), "Falta server/index.mjs");
+}
+
 const skillsRoot = path.join(pluginRoot, "skills");
 const skillDirectories = (await readdir(skillsRoot, { withFileTypes: true })).filter((entry) => entry.isDirectory());
 check(skillDirectories.length >= 1, "No hay skills");
