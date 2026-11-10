@@ -16,3 +16,12 @@ Este repositorio ficticio muestra cómo un segundo cerebro conecta proyectos, pr
 - [[knowledge/Decisiones|Decisiones]]
 
 La interfaz visual se genera desde estos archivos. El Markdown sigue siendo la fuente de verdad.
+
+## Cómo se organiza
+
+| Área | Para qué sirve | Ejemplo |
+| --- | --- | --- |
+| Proyectos | Agrupa objetivos, alcance y estado | [[projects/Atlas]] |
+| Procesos | Documenta trabajo repetible | [[processes/Captura]] |
+| Conocimiento | Conserva fuentes y decisiones | [[knowledge/Decisiones]] |
+| Agentes | Define especialistas y límites | [[agents/Coordinador]] |

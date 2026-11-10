@@ -1,6 +1,6 @@
 {
   "name": "gorilla-brain-repository",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "description": "Repositorio de distribución y validación del plugin Gorilla Brain.",
   "scripts": {

@@ -16,6 +16,7 @@ Desarrollado por [Innown](https://innown.es).
 - Genera un Site visual tipo Obsidian desde cualquier repositorio Markdown.
 - Resuelve wikilinks, backlinks, enlaces Markdown, huérfanas y enlaces rotos.
 - Incluye búsqueda, explorador y mapas interactivos 2D y 3D sin dependencias de frontend.
+- Presenta cada nota con pestaña, ruta, propiedades, icono semántico y tablas Markdown.
 
 ## Instalación desde GitHub
 
@@ -50,7 +51,7 @@ Los datos de clientes no deben guardarse en este repositorio público. Cada impl
 .agents/plugins/marketplace.json       Catálogo instalable desde el repositorio
 plugins/gorilla-brain/plugin.json      Manifiesto portable
 plugins/gorilla-brain/skills/          Flujos reutilizables
-plugins/gorilla-brain/templates/       Plantillas del segundo cerebro
+plugins/gorilla-brain/templates/       Plantillas del segundo cerebro y notas
 plugins/gorilla-brain/references/      Metodología y modelo de conocimiento
 plugins/gorilla-brain/site/            Interfaz web autocontenida
 plugins/gorilla-brain/scripts/         Compilador Markdown → Site
@@ -96,5 +97,5 @@ npm test
 
 ## Estado
 
-Versión pública `0.2.0`. Incluye el generador de Site y siete skills. No incluye todavía servidor MCP ni sincronización automática con Google Drive o Microsoft 365: esas integraciones requieren configurar identidad, permisos y fuente autorizada en cada implantación.
+Versión pública `0.3.0`. Incluye el generador de Site, experiencia visual de notas y siete skills. No incluye todavía servidor MCP ni sincronización automática con Google Drive o Microsoft 365: esas integraciones requieren configurar identidad, permisos y fuente autorizada en cada implantación.
 

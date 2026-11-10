@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "gorilla-brain",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Construye, utiliza y mantiene un segundo cerebro verificable en el repositorio privado del usuario, sin entrevistas infinitas ni decisiones técnicas trasladadas al cliente.",
   "author": {
     "name": "Innown",

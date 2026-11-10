@@ -23,6 +23,7 @@ button, input { font: inherit; }
 button, a { -webkit-tap-highlight-color: transparent; }
 button { cursor: pointer; }
 svg { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.ui-icon { width: 16px; height: 16px; flex: 0 0 auto; stroke-width: 1.7; }
 
 .skip-link { position: fixed; left: 12px; top: -60px; z-index: 99; background: var(--ink); color: white; padding: 10px 14px; border-radius: 8px; }
 .skip-link:focus { top: 10px; }
@@ -64,20 +65,26 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round
 .tree-group { margin-bottom: 4px; }
 .tree-folder { width: 100%; display: flex; align-items: center; gap: 7px; border: 0; background: transparent; color: var(--muted-ink); padding: 7px 6px; border-radius: 7px; text-align: left; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .045em; }
 .tree-folder:hover { background: #ececea; color: var(--ink); }
-.tree-folder svg { width: 14px; transition: transform .18s ease; }
-.tree-group.is-collapsed .tree-folder svg { transform: rotate(-90deg); }
+.tree-folder .chevron { width: 14px; transition: transform .18s ease; }
+.tree-folder .folder-icon { color: #777; }
+.tree-group.is-collapsed .tree-folder .chevron { transform: rotate(-90deg); }
 .tree-items { display: grid; gap: 2px; }
 .tree-group.is-collapsed .tree-items { display: none; }
-.tree-note { width: 100%; border: 0; background: transparent; display: flex; align-items: center; gap: 9px; padding: 8px 8px 8px 25px; border-radius: 7px; text-align: left; color: #4b4b4b; font-size: 13px; }
-.tree-note::before { content: ""; width: 7px; height: 7px; border: 1px solid #929292; border-radius: 50%; flex: 0 0 auto; }
+.tree-note { width: 100%; border: 0; background: transparent; display: flex; align-items: center; gap: 8px; padding: 8px 8px 8px 25px; border-radius: 7px; text-align: left; color: #4b4b4b; font-size: 13px; }
+.tree-note .ui-icon { width: 15px; height: 15px; color: #777; }
 .tree-note:hover { background: #eaeae7; color: var(--ink); }
 .tree-note.is-active { background: var(--yellow-soft); color: var(--ink); font-weight: 500; }
-.tree-note.is-active::before { background: var(--yellow); border-color: #a88900; }
+.tree-note.is-active .ui-icon { color: #8a7000; }
 .empty-state { color: var(--muted-ink); font-size: 13px; padding: 18px 6px; }
 
 .content-view { display: none; min-width: 0; overflow: auto; }
 .content-view.is-active { display: block; }
-.note { max-width: 820px; margin: 0 auto; padding: 62px clamp(32px, 6vw, 88px) 100px; line-height: 1.72; }
+.note-tabbar { position: sticky; top: 0; z-index: 5; height: 42px; display: flex; align-items: stretch; justify-content: space-between; background: #fafaf8; border-bottom: 1px solid var(--soft-line); }
+.active-tab { min-width: 180px; max-width: 42%; display: flex; align-items: center; gap: 8px; padding: 0 14px; background: white; border-right: 1px solid var(--soft-line); border-top: 2px solid var(--yellow); font-size: 12px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.active-tab .ui-icon { color: #6e6e6e; }
+.breadcrumbs { display: flex; align-items: center; gap: 5px; min-width: 0; padding: 0 16px; color: var(--muted-ink); font-size: 11px; overflow: hidden; white-space: nowrap; }
+.breadcrumbs .separator { color: #aaa; }
+.note { max-width: 860px; margin: 0 auto; padding: 48px clamp(32px, 6vw, 88px) 100px; line-height: 1.72; }
 .note .eyebrow { color: var(--muted-ink); font-size: 11px; text-transform: uppercase; letter-spacing: .1em; font-weight: 700; margin-bottom: 16px; }
 .note h1 { font-size: clamp(32px, 4vw, 50px); line-height: 1.06; letter-spacing: -.035em; margin: 0 0 30px; max-width: 700px; }
 .note h2 { font-size: 22px; letter-spacing: -.02em; margin: 42px 0 12px; }
@@ -87,6 +94,18 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round
 .note li { margin: 6px 0; }
 .note code { background: var(--panel); border: 1px solid var(--soft-line); border-radius: 5px; padding: 2px 5px; font-size: .9em; }
 .note blockquote { border-left: 3px solid var(--yellow); margin: 25px 0; padding: 4px 18px; color: var(--muted-ink); }
+.properties { display: grid; grid-template-columns: minmax(110px, 150px) 1fr; border: 1px solid var(--soft-line); border-radius: 10px; overflow: hidden; margin: 0 0 32px; background: #fbfbfa; }
+.property-name, .property-value { min-width: 0; padding: 8px 11px; border-bottom: 1px solid var(--soft-line); font-size: 12px; }
+.property-name { display: flex; align-items: center; gap: 7px; color: var(--muted-ink); background: #f5f5f3; font-weight: 500; }
+.property-value { color: #3f3f3f; overflow-wrap: anywhere; }
+.property-name:nth-last-child(-n+2), .property-value:last-child { border-bottom: 0; }
+.table-wrap { width: 100%; overflow-x: auto; margin: 22px 0 30px; border: 1px solid var(--line); border-radius: 10px; background: white; }
+.note table { width: 100%; border-collapse: collapse; min-width: 520px; font-size: 13px; line-height: 1.45; }
+.note th, .note td { padding: 11px 13px; border-right: 1px solid var(--soft-line); border-bottom: 1px solid var(--soft-line); text-align: left; vertical-align: top; }
+.note th { background: #f5f5f3; font-weight: 700; color: #3d3d3d; }
+.note tr:last-child td { border-bottom: 0; }
+.note th:last-child, .note td:last-child { border-right: 0; }
+.note tbody tr:hover { background: #fffdf0; }
 .note-link { border: 0; border-bottom: 2px solid var(--yellow); background: transparent; padding: 0 1px; color: inherit; font: inherit; }
 .note-link:hover { background: var(--yellow-soft); }
 .broken-link { color: var(--warning); border-bottom: 1px dashed currentColor; }
@@ -136,6 +155,11 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round
   .navigation.is-open { transform: translateX(0); }
   .content-view { height: 100%; }
   .note { padding: 38px 22px 120px; }
+  .note-tabbar { height: 40px; }
+  .active-tab { max-width: 58%; min-width: 0; }
+  .breadcrumbs { display: none; }
+  .properties { grid-template-columns: 100px 1fr; }
+  .property-name, .property-value { padding: 8px; }
   .note h1 { font-size: 34px; }
   .graph-toolbar { align-items: flex-start; padding: 12px; }
   .graph-toolbar span { max-width: 220px; }

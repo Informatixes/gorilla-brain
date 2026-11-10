@@ -13,6 +13,8 @@ const elements = {
   tree: document.querySelector("#tree"),
   search: document.querySelector("#search"),
   note: document.querySelector("#note"),
+  activeTab: document.querySelector("#active-tab"),
+  breadcrumbs: document.querySelector("#breadcrumbs"),
   noteMeta: document.querySelector("#note-meta"),
   outgoing: document.querySelector("#outgoing"),
   backlinks: document.querySelector("#backlinks"),
@@ -28,6 +30,35 @@ const elements = {
 
 const escapeHtml = (value) => String(value).replace(/[&<>'"]/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" })[character]);
 const escapeAttribute = escapeHtml;
+
+const iconPaths = {
+  file: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/>',
+  home: '<path d="m3 11 9-8 9 8"/><path d="M5 10v10h14V10M9 20v-6h6v6"/>',
+  folder: '<path d="M3 6a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/>',
+  project: '<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18"/>',
+  process: '<circle cx="6" cy="6" r="2"/><circle cx="18" cy="18" r="2"/><path d="M8 6h5a3 3 0 0 1 3 3v7M16 18H9a3 3 0 0 1-3-3V8"/>',
+  decision: '<rect x="3" y="3" width="18" height="18" rx="3"/><path d="m7 12 3 3 7-7"/>',
+  sources: '<path d="M10 13a5 5 0 0 0 7.5.5l2-2a5 5 0 0 0-7-7l-1.1 1.1"/><path d="M14 11a5 5 0 0 0-7.5-.5l-2 2a5 5 0 0 0 7 7l1.1-1.1"/>',
+  agent: '<rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 9h6v6H9zM9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 15h3M1 9h3M1 15h3"/>',
+  tag: '<path d="M20 13 11 22l-9-9V2h11Z"/><circle cx="7" cy="7" r="1"/>',
+  status: '<circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/>',
+  type: '<path d="M4 5h16M4 12h10M4 19h13"/>'
+};
+
+function icon(name, className = "") {
+  return `<svg class="ui-icon ${className}" viewBox="0 0 24 24" aria-hidden="true">${iconPaths[name] || iconPaths.file}</svg>`;
+}
+
+function noteIcon(note) {
+  const type = note?.type?.toLowerCase() || "";
+  if (type === "index") return "home";
+  if (type.includes("project")) return "project";
+  if (type.includes("process")) return "process";
+  if (type.includes("decision")) return "decision";
+  if (type.includes("source")) return "sources";
+  if (type.includes("agent")) return "agent";
+  return "file";
+}
 
 function resolveReference(raw, sourceId) {
   const target = raw.split("#")[0].replace(/\\/g, "/").replace(/\.md$/i, "").replace(/^\.\//, "");
@@ -58,14 +89,37 @@ function inlineMarkdown(text, sourceId) {
   return result;
 }
 
+function parseTableRow(line) {
+  return line.trim().replace(/^\||\|$/g, "").split("|").map((cell) => cell.trim());
+}
+
+function isTableDivider(line) {
+  const cells = parseTableRow(line);
+  return cells.length > 0 && cells.every((cell) => /^:?-{3,}:?$/.test(cell));
+}
+
 function renderMarkdown(markdown, sourceId) {
   const lines = markdown.split(/\r?\n/);
   const output = [];
   let list = null;
   const closeList = () => { if (list) { output.push(`</${list}>`); list = null; } };
-  for (const rawLine of lines) {
+  for (let index = 0; index < lines.length; index += 1) {
+    const rawLine = lines[index];
     const line = rawLine.trimEnd();
     if (!line.trim()) { closeList(); continue; }
+    if (line.includes("|") && lines[index + 1]?.includes("|") && isTableDivider(lines[index + 1])) {
+      closeList();
+      const headers = parseTableRow(line);
+      const rows = [];
+      index += 2;
+      while (index < lines.length && lines[index].trim() && lines[index].includes("|")) {
+        rows.push(parseTableRow(lines[index]));
+        index += 1;
+      }
+      index -= 1;
+      output.push(`<div class="table-wrap" role="region" aria-label="Tabla desplazable" tabindex="0"><table><thead><tr>${headers.map((cell) => `<th scope="col">${inlineMarkdown(cell, sourceId)}</th>`).join("")}</tr></thead><tbody>${rows.map((row) => `<tr>${headers.map((_, cellIndex) => `<td>${inlineMarkdown(row[cellIndex] || "", sourceId)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`);
+      continue;
+    }
     const heading = line.match(/^(#{1,3})\s+(.+)$/);
     if (heading) { closeList(); output.push(`<h${heading[1].length}>${inlineMarkdown(heading[2], sourceId)}</h${heading[1].length}>`); continue; }
     const bullet = line.match(/^\s*[-*]\s+(.+)$/);
@@ -107,9 +161,9 @@ function renderTree() {
   elements.tree.innerHTML = Object.entries(groups).sort(([a], [b]) => a.localeCompare(b)).map(([folder, notes]) => `
     <div class="tree-group">
       <button class="tree-folder" type="button" aria-expanded="true">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5"/></svg>${escapeHtml(folder)}<span>(${notes.length})</span>
+        <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5"/></svg>${icon("folder", "folder-icon")}${escapeHtml(folder)}<span>(${notes.length})</span>
       </button>
-      <div class="tree-items">${notes.sort((a, b) => a.title.localeCompare(b.title)).map((note) => `<button class="tree-note${note.id === state.currentId ? " is-active" : ""}" data-note="${escapeAttribute(note.id)}" type="button">${escapeHtml(note.title)}</button>`).join("")}</div>
+      <div class="tree-items">${notes.sort((a, b) => a.title.localeCompare(b.title)).map((note) => `<button class="tree-note${note.id === state.currentId ? " is-active" : ""}" data-note="${escapeAttribute(note.id)}" type="button">${icon(noteIcon(note))}<span>${escapeHtml(note.title)}</span></button>`).join("")}</div>
     </div>`).join("") || `<p class="empty-state">No hay resultados para “${escapeHtml(state.query)}”.</p>`;
 }
 
@@ -122,7 +176,11 @@ function renderNote() {
   const note = state.notes.get(state.currentId);
   if (!note) return;
   const bodyWithoutTitle = note.body.replace(/^\s*#\s+.+\r?\n?/, "");
-  elements.note.innerHTML = `<div class="eyebrow">${escapeHtml(note.type)}</div><h1>${escapeHtml(note.title)}</h1>${renderMarkdown(bodyWithoutTitle, note.id)}`;
+  const properties = `<div class="properties" aria-label="Propiedades de la nota"><div class="property-name">${icon("type")}Tipo</div><div class="property-value">${escapeHtml(note.type)}</div><div class="property-name">${icon("status")}Estado</div><div class="property-value">${escapeHtml(note.status)}</div><div class="property-name">${icon("tag")}Etiquetas</div><div class="property-value">${note.tags.length ? note.tags.map((tag) => `#${escapeHtml(tag)}`).join(" · ") : "Sin etiquetas"}</div></div>`;
+  elements.note.innerHTML = `<div class="eyebrow">Nota · ${escapeHtml(note.type)}</div><h1>${escapeHtml(note.title)}</h1>${properties}${renderMarkdown(bodyWithoutTitle, note.id)}`;
+  elements.activeTab.innerHTML = `${icon(noteIcon(note))}<span>${escapeHtml(note.title)}</span>`;
+  const route = note.id.split("/");
+  elements.breadcrumbs.innerHTML = route.map((part, index) => `${index ? '<span class="separator">›</span>' : ""}<span>${escapeHtml(index === route.length - 1 ? note.title : part)}</span>`).join("");
   elements.noteMeta.innerHTML = `<h2 class="meta-title">${escapeHtml(note.title)}</h2><div class="meta-path">${escapeHtml(note.path)}</div><div class="chips"><span class="chip status">${escapeHtml(note.status)}</span><span class="chip">${escapeHtml(note.type)}</span>${note.tags.map((tag) => `<span class="chip">#${escapeHtml(tag)}</span>`).join("")}</div>`;
   elements.outgoing.innerHTML = note.outgoing.map(noteButton).join("") || `<span class="empty-state">Sin enlaces salientes</span>`;
   elements.backlinks.innerHTML = note.backlinks.map(noteButton).join("") || `<span class="empty-state">Sin backlinks</span>`;

@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.0 — 2026-11-10
+
+- Experiencia de notas más cercana a Obsidian, conservando la identidad visual de Gorilla Brain.
+- Iconos SVG por tipo de nota y carpetas con una familia visual consistente.
+- Pestaña activa, ruta jerárquica y bloque de propiedades por nota.
+- Renderizado de tablas Markdown con desplazamiento horizontal accesible en móvil.
+- Plantilla `NOTE.md` con relaciones, seguimiento y tabla estructurada.
+
 ## 0.2.0 — 2026-11-10
 
 - Compilador determinista de repositorios Markdown a Site estático.
