@@ -1,0 +1,13 @@
+node_modules/
+*.zip
+*.tar.gz
+.DS_Store
+Thumbs.db
+.env
+.env.*
+!.env.example
+private/
+clients/
+customer-data/
+artifacts/
+

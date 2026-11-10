@@ -1,0 +1,42 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "gorilla-brain",
+  "version": "0.1.0",
+  "description": "Construye, utiliza y mantiene un segundo cerebro verificable en el repositorio privado del usuario, sin entrevistas infinitas ni decisiones técnicas trasladadas al cliente.",
+  "author": {
+    "name": "Innown",
+    "url": "https://innown.es"
+  },
+  "homepage": "https://innown.es",
+  "repository": "https://github.com/Informatixes/gorilla-brain",
+  "license": "Apache-2.0",
+  "keywords": [
+    "second-brain",
+    "knowledge-management",
+    "agents",
+    "context",
+    "productivity"
+  ],
+  "extensions": {
+    "com.openai": {
+      "onboardingSkill": "./skills/setup/SKILL.md",
+      "interface": {
+        "displayName": "Gorilla Brain",
+        "shortDescription": "Segundo cerebro guiado",
+        "longDescription": "Implanta un segundo cerebro propio, conserva el conocimiento en archivos trazables y crea especialistas adaptados al trabajo real.",
+        "developerName": "Innown",
+        "category": "Productivity",
+        "capabilities": [
+          "Interactive"
+        ],
+        "websiteURL": "https://innown.es",
+        "defaultPrompt": [
+          "Configura mi segundo cerebro con Gorilla Brain.",
+          "Continúa mi implantación desde el estado guardado.",
+          "Usa mi segundo cerebro para resolver esta tarea."
+        ]
+      }
+    }
+  }
+}
+

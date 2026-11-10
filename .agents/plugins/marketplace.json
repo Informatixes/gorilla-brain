@@ -1,0 +1,21 @@
+{
+  "name": "gorilla-brain-marketplace",
+  "interface": {
+    "displayName": "Gorilla Brain by Innown"
+  },
+  "plugins": [
+    {
+      "name": "gorilla-brain",
+      "source": {
+        "source": "local",
+        "path": "./plugins/gorilla-brain"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}
+
