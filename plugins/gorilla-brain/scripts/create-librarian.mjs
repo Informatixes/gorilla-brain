@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { access, appendFile, readFile, writeFile } from "node:fs/promises";
+import { access, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
 import { fileURLToPath } from "node:url";
@@ -19,5 +19,11 @@ const result = { target, scope, folders, apply };
 if (!apply) { console.log(JSON.stringify(result, null, 2)); process.exit(0); }
 await writeFile(target, template, { encoding: "utf8", flag: "wx" });
 const catalog = path.join(root, "agents", "AGENTS.md");
-await appendFile(catalog, `\n| Bibliotecario | Consultar conocimiento con fuentes | Pregunta sobre el repositorio | ${folders} | Solo lectura | Diseñado |\n`, "utf8");
+const catalogText = await readFile(catalog, "utf8");
+const row = `| Bibliotecario | Consultar conocimiento con fuentes | Pregunta sobre el repositorio | ${folders} | Solo lectura | Diseñado |`;
+const tableSeparator = /^\| --- \| --- \| --- \| --- \| --- \| --- \|$/m;
+const updated = tableSeparator.test(catalogText)
+  ? catalogText.replace(tableSeparator, (line) => `${line}\n${row}`)
+  : `${catalogText}\n## Bibliotecario\n\n| Nombre | Propósito | Activador | Fuentes | Acciones permitidas | Estado |\n| --- | --- | --- | --- | --- | --- |\n${row}\n`;
+await writeFile(catalog, updated, "utf8");
 console.log(JSON.stringify({ ...result, created: true, catalog }, null, 2));

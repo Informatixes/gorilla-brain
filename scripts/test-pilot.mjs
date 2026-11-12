@@ -17,6 +17,8 @@ try {
   const query = spawnSync(process.execPath, [path.join(pluginScripts, "query-brain.mjs"), "--vault", root, "--query", "fuente de verdad"], { encoding: "utf8" });
   if (query.status !== 0) throw new Error(query.stderr || "Falló la consulta");
   const result = JSON.parse(query.stdout);
+  const catalog = await readFile(path.join(root, "agents", "AGENTS.md"), "utf8");
+  if (catalog.indexOf("| Bibliotecario |") > catalog.indexOf("## Candidatos")) throw new Error("Bibliotecario fuera de la tabla");
   const agent = await readFile(path.join(root, "agents", "BIBLIOTECARIO.md"), "utf8");
   if (!result.results.some((item) => item.path === "knowledge/CONTEXT.md")) throw new Error("No recuperó la fuente preparada");
   if (!agent.includes("Piloto") || !agent.includes("Solo lectura")) throw new Error("Bibliotecario sin ámbito o límites");

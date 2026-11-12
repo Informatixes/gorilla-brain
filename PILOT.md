@@ -5,14 +5,26 @@ Esta guía deja una implantación preparada para una prueba controlada con un us
 ## 1. Condiciones previas
 
 - Windows, macOS o Linux con Node.js 20 o posterior.
-- ChatGPT o Codex Desktop con ejecución local de plugins.
+- Un cliente ChatGPT/Codex que realmente permita plugins locales y lectura/escritura/ejecución; no asumirlo en ChatGPT web.
 - Un repositorio privado independiente para el usuario o cliente.
 - Una carpeta local o sincronizada de Google Drive u OneDrive cuyo acceso ya haya sido autorizado.
 - Copia de seguridad o historial de versiones activo antes de incorporar documentación real.
 
 No reutilices un repositorio entre clientes. El Site generado es una vista derivada: la fuente de verdad continúa siendo el repositorio Markdown privado.
 
-## 2. Crear la estructura
+## 2. Prueba autónoma de extremo a extremo
+
+Abre una carpeta privada vacía como espacio de trabajo. En un chat nuevo, pide:
+
+> Configura mi segundo cerebro global con Gorilla Brain. Aprovecha lo que te aporte y las fuentes que autorice. Pregúntame de una vez lo imprescindible, decide tú la estructura y continúa hasta tener notas con fuentes, Site local navegable y consultas verificadas. No te detengas en carpetas vacías. No publiques ni conectes nuevas fuentes sin permiso. Explica límites y bloqueos reales, sin inventar acceso a mi historial.
+
+Para el piloto, responde con información ficticia y dos ámbitos de ejemplo. El agente debe completar el recorrido sin una nueva orden por fase. Comprueba también añadir una decisión, regenerar la vista y reabrir el espacio sin sobrescribirlo. Este ensayo del agente es distinto de `npm test`.
+
+Los comandos siguientes son una vía manual de diagnóstico, **no el resultado final esperado del usuario**. Se ejecutan desde la raíz del checkout; desde otra carpeta utiliza la ruta absoluta al script entre comillas. La skill instalada resuelve su propia raíz, nunca `../../scripts` respecto al directorio de trabajo.
+
+Antes de comenzar: `node "<raíz-del-plugin>/scripts/doctor.mjs"`. Sustituye el marcador por la ruta real.
+
+## 3. Crear la estructura
 
 Primero revisa el plan sin escribir archivos:
 
@@ -73,7 +85,7 @@ node .\plugins\gorilla-brain\scripts\build-site.mjs --vault "C:\ruta\privada\cli
 Comprueba el resultado localmente antes de publicarlo:
 
 ```powershell
-python -m http.server 4173 --directory "C:\ruta\privada\cliente\site"
+python -m http.server 4173 --bind 127.0.0.1 --directory "C:\ruta\privada\cliente\site"
 ```
 
 Abre `http://localhost:4173`. Verifica búsqueda, notas, fuentes, tablas, backlinks y mapas. La publicación y los permisos del Site son un paso separado y requieren confirmación expresa.
@@ -111,3 +123,7 @@ La prueba valida manifiestos, nueve skills, build del Site, enlaces, consulta tr
 - Si una consulta no devuelve evidencia, revisa que el archivo sea Markdown y esté dentro de la raíz autorizada.
 - Si el Site queda desactualizado, regenera la carpeta de salida; no edites `knowledge.json` directamente.
 - Si se comparte información por error, revoca primero el acceso externo y restaura después desde el historial privado.
+
+## Actualizar desde 0.5.0
+
+Comprueba que el manifiesto instalado muestra 0.5.1; actualizar el checkout no siempre actualiza la copia del plugin del host. Usa su flujo soportado de actualización, abre un chat nuevo y ejecuta doctor. No borres el cerebro privado ni lo reinicialices. Si una salida Site antigua carece de marca de generación, construye a una carpeta vacía nueva y conserva la anterior.

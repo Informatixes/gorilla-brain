@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { cp, mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
+import { cp, mkdir, readFile, readdir, realpath, lstat, writeFile } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
 import { fileURLToPath } from "node:url";
@@ -62,7 +62,7 @@ function firstHeading(body, fallback) {
 async function collectMarkdown(directory) {
   const result = [];
   for (const entry of await readdir(directory, { withFileTypes: true })) {
-    if ([".git", "node_modules", ".openai"].includes(entry.name)) continue;
+    if ([".git", "node_modules", ".openai"].includes(entry.name) || path.resolve(directory, entry.name) === output) continue;
     const fullPath = path.join(directory, entry.name);
     if (entry.isDirectory()) result.push(...await collectMarkdown(fullPath));
     else if (entry.isFile() && entry.name.toLowerCase().endsWith(".md")) result.push(fullPath);
@@ -101,8 +101,28 @@ if (!args.vault || !args.out) {
   process.exit(1);
 }
 
-const vault = path.resolve(process.cwd(), args.vault);
-const output = path.resolve(process.cwd(), args.out);
+const vault = await realpath(path.resolve(process.cwd(), args.vault));
+let output = path.resolve(process.cwd(), args.out);
+async function canonicalTarget(target) {
+  try { return await realpath(target); }
+  catch (error) { if (error.code !== 'ENOENT') throw error; return path.join(await canonicalTarget(path.dirname(target)), path.basename(target)); }
+}
+output = await canonicalTarget(output);
+const relativeVault = path.relative(output, vault);
+if (!relativeVault || (!relativeVault.startsWith('..' + path.sep) && relativeVault !== '..' && !path.isAbsolute(relativeVault))) {
+  throw new Error('La salida no puede ser la raíz de conocimiento ni un directorio que la contenga.');
+}
+let entries = [];
+try { entries = await readdir(output); } catch (error) { if (error.code !== 'ENOENT') throw error; }
+const generated = ['index.html', 'styles.css', 'app.js', 'knowledge.json', '.gorilla-generated.json'];
+if (entries.some(name => !generated.includes(name))) throw new Error('Salida con archivos ajenos: elige una carpeta vacía.');
+for (const entry of entries) {
+  if ((await lstat(path.join(output, entry))).isSymbolicLink()) throw new Error("La salida contiene enlaces simbólicos; usa una carpeta nueva.");
+}
+if (entries.length) {
+  const marker = JSON.parse(await readFile(path.join(output, '.gorilla-generated.json'), 'utf8'));
+  if (marker.generator !== 'gorilla-brain' || marker.vault !== vault) throw new Error('Salida no reconocida o pertenece a otro cerebro. Usa una carpeta nueva.');
+}
 const title = String(args.title || "Gorilla Brain").trim();
 const files = await collectMarkdown(vault);
 if (files.length === 0) {
@@ -168,9 +188,9 @@ const payload = {
   orphans
 };
 
-await rm(output, { recursive: true, force: true });
 await mkdir(output, { recursive: true });
 await cp(path.join(pluginRoot, "site"), output, { recursive: true });
+await writeFile(path.join(output, ".gorilla-generated.json"), JSON.stringify({generator: "gorilla-brain", vault}));
 const htmlPath = path.join(output, "index.html");
 const html = (await readFile(htmlPath, "utf8")).replaceAll("{{SITE_TITLE}}", title.replace(/[<&>"']/g, ""));
 await writeFile(htmlPath, html, "utf8");

@@ -22,9 +22,15 @@ Desarrollado por [Innown](https://innown.es).
 - Incluye un MCP local de solo lectura para buscar, abrir notas y consultar el estado sin publicar el repositorio.
 - Inicializa un piloto repetible y crea el Bibliotecario mediante comandos con vista previa y protección contra sobrescrituras.
 
+## Requisito importante
+
+Esta distribución requiere un agente con lectura/escritura de archivos y ejecución local, más Node.js 20+. **No basta pegar la URL en un ChatGPT sin esas herramientas.** No obtiene toda la memoria o el historial de la cuenta y no se mantiene activo entre conversaciones por sí solo. Consulta [capacidades y límites](plugins/gorilla-brain/references/capabilities.md).
+
+La configuración debe continuar hasta un cerebro poblado, vista local y consultas verificadas, no solo carpetas vacías. Si el entorno no permite algo, informa el bloqueo y conserva el avance sin inventar éxito.
+
 ## Instalación desde GitHub
 
-En Codex o ChatGPT Desktop, añade este repositorio como marketplace:
+En un cliente que admita marketplaces y ejecución local de plugins, añade este repositorio como marketplace:
 
 ```text
 codex plugin marketplace add Informatixes/gorilla-brain
@@ -109,7 +115,7 @@ Para ejecutar la demostración incluida:
 
 ```text
 npm run build:demo
-python -m http.server 4173 --directory site-dist
+python -m http.server 4173 --bind 127.0.0.1 --directory site-dist
 ```
 
 La publicación debe ser privada por defecto. La carpeta compilada es una vista: las correcciones se realizan en Markdown y después se regenera.
@@ -133,5 +139,5 @@ npm test
 
 ## Estado
 
-Versión pública `0.5.0`. Incluye el generador de Site, consulta verificable, experiencia visual de notas, nueve skills, inicializador protegido y MCP local de solo lectura. No incluye sincronización automática con Google Drive o Microsoft 365: esas integraciones requieren configurar identidad, permisos y fuente autorizada en cada implantación.
+Versión `0.5.1`. Incluye el generador de Site, consulta verificable, experiencia visual de notas, nueve skills, inicializador protegido y MCP local de solo lectura. No incluye sincronización automática con Google Drive o Microsoft 365: esas integraciones requieren configurar identidad, permisos y fuente autorizada en cada implantación.
 

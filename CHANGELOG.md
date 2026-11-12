@@ -1,3 +1,12 @@
+## 0.5.1 — Corrección de arranque y recorrido completo
+
+- Rutas absolutas resueltas desde la skill y diagnóstico temprano de ejecución/Node.
+- Configuración que continúa hasta captura, Site y consultas verificadas; límites de memoria e historial explícitos.
+- Continuidad local mediante AGENTS.md y mantenimiento limitado al alcance autorizado.
+- Generación del Site sin borrado recursivo, rechazo de salida sobre las fuentes o archivos ajenos.
+- Pruebas desde carpetas con espacios y directorio de trabajo distinto del plugin.
+- No implica aceptación del usuario ni prueba en todos los hosts ChatGPT/Codex.
+
 # Changelog
 
 ## 0.5.0 — 2026-11-10

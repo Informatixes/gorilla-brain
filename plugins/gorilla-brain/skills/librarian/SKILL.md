@@ -15,7 +15,7 @@ Recuperar conocimiento del repositorio sin inventar, mezclar ámbitos ni convert
 2. Ejecuta la recuperación determinista:
 
    ```text
-   node scripts/query-brain.mjs --vault <repositorio> --query "<pregunta>" --limit 8 --format markdown
+   node "<raíz-absoluta-del-plugin>/scripts/query-brain.mjs" --vault "<repositorio>" --query "<pregunta>" --limit 8 --format markdown
    ```
 
 3. Lee las notas mejor clasificadas y sus enlaces relevantes.
@@ -42,3 +42,5 @@ Entrega:
 - No modifiques notas durante una consulta.
 - No reveles información de otro cliente, proyecto o ámbito.
 - Si no hay evidencia suficiente, responde expresamente que el repositorio no permite concluirlo.
+
+Resuelve la raíz absoluta del plugin según la skill setup; no asumas el directorio actual.

@@ -30,7 +30,8 @@ En cada turno:
 2. Produce o actualiza al menos un artefacto útil.
 3. Registra evidencia, decisiones y pendientes.
 4. Actualiza `STATE.md`.
-5. Indica una única siguiente acción.
+5. Ejecuta la siguiente acción autorizada y repite el ciclo dentro de la misma tarea hasta completar el resultado operativo o encontrar un bloqueo real. No conviertas cada fase en una nueva petición al usuario.
+6. En una implantación nueva, incluye captura de información, HOME.md, Site local y verificación de consultas. Sigue el cierre operativo de la skill setup; carpetas vacías no bastan.
 
 ## Límite de preguntas
 

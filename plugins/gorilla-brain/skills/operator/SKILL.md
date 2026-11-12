@@ -27,5 +27,5 @@ Leer contexto no autoriza enviar, publicar, gastar, modificar permisos, borrar o
 
 ## Aprendizaje
 
-No escribas automáticamente cada conversación en memoria. Propón capturar únicamente información estable, decisiones o conocimiento reutilizable. Si el usuario lo aprueba, deriva a `knowledge-capture`.
+No escribas automáticamente cada conversación en memoria. Propón capturar únicamente información estable, decisiones o conocimiento reutilizable. Si ya existe autorización de mantenimiento para esos ámbitos en PROJECT.md, deriva directamente a `knowledge-capture` dentro de ese alcance. En otro caso pide la autorización concreta. Regenera la vista y verifica la nota después de capturar. No prometas capturar conversaciones ajenas a esta sesión ni trabajar en segundo plano sin un mecanismo real.
 

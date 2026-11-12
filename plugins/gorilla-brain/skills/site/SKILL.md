@@ -16,7 +16,7 @@ Generar una interfaz de consulta a partir del repositorio privado del usuario. E
 3. Ejecuta desde la raíz del plugin:
 
    ```text
-   node scripts/build-site.mjs --vault <repositorio> --out <salida> --title "<nombre>"
+   node "<raíz-absoluta-del-plugin>/scripts/build-site.mjs" --vault "<repositorio>" --out "<salida>" --title "<nombre>"
    ```
 
 4. Revisa `knowledge.json` y el resumen de compilación:
@@ -46,3 +46,5 @@ Generar una interfaz de consulta a partir del repositorio privado del usuario. E
 ## Salida
 
 Entrega la carpeta generada, las métricas de integridad, el modo de regeneración y, si procede, la URL publicada con su visibilidad verificada.
+
+Resuelve la raíz absoluta del plugin según la skill setup; no asumas el directorio actual.

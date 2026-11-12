@@ -1,14 +1,13 @@
 {
   "name": "gorilla-brain-repository",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "private": true,
   "description": "Repositorio de distribución y validación del plugin Gorilla Brain.",
   "scripts": {
     "build:demo": "node plugins/gorilla-brain/scripts/build-site.mjs --vault demo-vault --out site-dist --title \"Gorilla Brain Demo\"",
-    "test": "node scripts/validate.mjs && node --check plugins/gorilla-brain/scripts/build-site.mjs && node --check plugins/gorilla-brain/scripts/query-brain.mjs && node --check plugins/gorilla-brain/scripts/init-brain.mjs && node --check plugins/gorilla-brain/scripts/create-librarian.mjs && node --check plugins/gorilla-brain/server/index.mjs && node --check plugins/gorilla-brain/site/app.js && npm run build:demo && node scripts/validate-build.mjs && node scripts/test-query.mjs && node scripts/test-pilot.mjs && node scripts/test-mcp.mjs"
+    "test": "node scripts/validate.mjs && node --check plugins/gorilla-brain/scripts/build-site.mjs && node --check plugins/gorilla-brain/scripts/query-brain.mjs && node --check plugins/gorilla-brain/scripts/init-brain.mjs && node --check plugins/gorilla-brain/scripts/create-librarian.mjs && node --check plugins/gorilla-brain/server/index.mjs && node --check plugins/gorilla-brain/site/app.js && npm run build:demo && node scripts/validate-build.mjs && node scripts/test-query.mjs && node scripts/test-pilot.mjs && node scripts/test-mcp.mjs && node scripts/test-setup.mjs"
   },
   "engines": {
     "node": ">=20"
   }
 }
-

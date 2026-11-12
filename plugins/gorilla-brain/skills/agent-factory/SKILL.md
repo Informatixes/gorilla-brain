@@ -13,7 +13,7 @@ description: Crea y registra un especialista Bibliotecario adaptado al repositor
 
 1. Lee `PROJECT.md`, `STATE.md`, `knowledge/CONTEXT.md` y `agents/AGENTS.md`.
 2. Confirma las carpetas autorizadas y los ámbitos que deben permanecer separados.
-3. Copia `templates/LIBRARIAN_AGENT.md` a `agents/BIBLIOTECARIO.md`.
+3. Resuelve la raíz absoluta del plugin como indica setup; copia `<raíz-absoluta-del-plugin>/templates/LIBRARIAN_AGENT.md` a `agents/BIBLIOTECARIO.md` dentro del cerebro privado, sin sobrescribir un archivo existente.
 4. Sustituye únicamente los campos marcados entre `<...>` con información confirmada del repositorio.
 5. Registra el especialista en `agents/AGENTS.md` con estado `Diseñado`.
 6. Prueba cinco escenarios: normal, información incompleta, contradicción, fuera de alcance y acción sensible.
