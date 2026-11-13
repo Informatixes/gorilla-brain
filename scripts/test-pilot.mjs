@@ -20,9 +20,11 @@ try {
   const catalog = await readFile(path.join(root, "agents", "AGENTS.md"), "utf8");
   if (catalog.indexOf("| Bibliotecario |") > catalog.indexOf("## Candidatos")) throw new Error("Bibliotecario fuera de la tabla");
   const agent = await readFile(path.join(root, "agents", "BIBLIOTECARIO.md"), "utf8");
+  const usage = await readFile(path.join(root, "agents", "COMO-USAR-GORILLA-BRAIN.md"), "utf8");
   if (!result.results.some((item) => item.path === "knowledge/CONTEXT.md")) throw new Error("No recuperó la fuente preparada");
   if (!agent.includes("Piloto") || !agent.includes("Solo lectura")) throw new Error("Bibliotecario sin ámbito o límites");
-  console.log("Piloto verificado: inicialización, Bibliotecario y consulta trazable.");
+  if (!usage.includes(root) || !usage.includes("knowledge/")) throw new Error("Guía de invocación sin repositorio o carpetas autorizadas");
+  console.log("Piloto verificado: inicialización, Bibliotecario, guía de invocación y consulta trazable.");
 } finally {
   await rm(root, { recursive: true, force: true });
 }
