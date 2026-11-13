@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "gorilla-brain",
-  "version": "0.5.1",
-  "description": "Construye, utiliza y mantiene un segundo cerebro verificable en el repositorio privado del usuario, sin entrevistas infinitas ni decisiones técnicas trasladadas al cliente.",
+  "version": "0.6.0",
+  "description": "Construye, consulta y mantiene un segundo cerebro privado y verificable, con onboarding explicativo, conexiones entre notas, Site visual y mantenimiento diario controlado.",
   "author": {
     "name": "Innown",
     "url": "https://innown.es"
@@ -24,7 +24,7 @@
       "interface": {
         "displayName": "Gorilla Brain",
         "shortDescription": "Segundo cerebro visual",
-        "longDescription": "Implanta un segundo cerebro propio, conserva conocimiento trazable, crea especialistas y genera un Site navegable con búsqueda, backlinks y grafo 2D o 3D.",
+        "longDescription": "Implanta un segundo cerebro propio, explica su funcionamiento antes de configurarlo, conserva conocimiento trazable y genera un Site navegable con búsqueda, backlinks y grafo 2D o 3D. Puede mantenerlo a diario cuando existen fuentes y automatización autorizadas y verificadas.",
         "developerName": "Innown",
         "category": "Productivity",
         "capabilities": [
@@ -33,10 +33,12 @@
         "websiteURL": "https://innown.es",
         "defaultPrompt": [
           "Configura mi segundo cerebro con Gorilla Brain.",
+          "Explícame qué encontraré y cómo usaré Gorilla Brain antes de instalarlo.",
           "Continúa mi implantación desde el estado guardado.",
           "Usa mi segundo cerebro para resolver esta tarea.",
           "Genera el Site visual de mi segundo cerebro.",
-          "Crea un agente Bibliotecario que pueda consultar mi segundo cerebro."
+          "Crea un agente Bibliotecario que pueda consultar mi segundo cerebro.",
+          "Configura y verifica la actualización diaria de mi segundo cerebro."
         ]
       }
     }
