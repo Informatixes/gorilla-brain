@@ -15,13 +15,13 @@ Antes de ejecutar comandos, pedir datos o crear archivos, explica en lenguaje cl
 2. **Qué encontrará:** notas, fuentes, decisiones, proyectos, personas, procesos, enlaces, backlinks, búsqueda, grafo y un registro del estado del sistema.
 3. **Qué podrá hacer:** consultar información conectada entre sí, localizar la evidencia de una respuesta, detectar contradicciones, recuperar decisiones y mantener contexto entre sesiones autorizadas.
 4. **Cómo se usa:** mediante preguntas naturales o, si la interfaz admite menciones, con `@Gorilla Brain`. Incluye ejemplos de consulta, captura, relación, auditoría y mantenimiento: «¿qué decidimos sobre este proyecto?», «relaciona estas notas», «incorpora esta fuente sin duplicarla», «¿qué está desactualizado?» y «actualiza el cerebro con las fuentes autorizadas».
-5. **Qué se va a hacer:** comprobar capacidades, elegir una carpeta privada, crear o continuar la estructura, incorporar las primeras fuentes, generar el Site, crear el Bibliotecario vinculado al repositorio, probar su invocación y definir el mantenimiento.
+5. **Qué se va a hacer:** comprobar capacidades, elegir una carpeta privada, crear o continuar la estructura, incorporar las primeras fuentes, generar el Site, crear el Bibliotecario, probar su invocación, analizar el repositorio para proponer agentes o complementos útiles y definir el mantenimiento.
 6. **Qué no ocurre por instalarlo:** no obtiene automáticamente el historial completo de ChatGPT, el correo, Drive o Microsoft 365; cada fuente requiere acceso, alcance y autorización verificables. La actualización diaria solo se considera activa cuando exista una automatización creada y probada.
 
 Termina esta explicación con dos bloques visibles:
 
 - **Cómo lo usarás después:** indica la mención disponible, si existe, y ofrece al menos un ejemplo para consultar, incorporar conocimiento, comprobar vigencia y ejecutar el mantenimiento diario.
-- **Siguientes pasos:** carpeta privada y primer ámbito; primeras fuentes; notas y conexiones; Site; creación y prueba del Bibliotecario; mantenimiento diario opcional.
+- **Siguientes pasos:** carpeta privada y primer ámbito; primeras fuentes; notas y conexiones; Site; creación y prueba del Bibliotecario; análisis de oportunidades; aprobación de agentes o complementos concretos; mantenimiento diario opcional.
 
 Adapta la extensión al contexto, pero no omitas estos puntos ni los sustituyas por una lista de comandos. Después continúa con las comprobaciones y la única entrevista inicial.
 
@@ -94,7 +94,8 @@ La inicialización solo crea plantillas. **No termines al completar discover ni 
 6. Ejecuta `node "<raíz-absoluta-del-plugin>/scripts/query-brain.mjs" --vault "<ruta-privada>" --query "<pregunta-con-evidencia>"`; verifica la nota citada y luego prueba una pregunta sin evidencia. Una coincidencia de palabras no demuestra la respuesta: lee la nota antes de afirmar.
 7. Añade una corrección autorizada conservando el antecedente, regenera y verifica que se ve. Registra pasos repetibles y pruebas en STATE.md. No añadas una corrección inventada a datos reales para probar: usa un espacio ficticio separado.
 8. Abre `agents/COMO-USAR-GORILLA-BRAIN.md` con el usuario y confirma el método real de invocación de esa superficie. Ejecuta una consulta desde ese método y registra el resultado; no confundas un archivo de agente con un subagente disponible.
-9. Define cómo se mantendrá: captura durante sesiones autorizadas y revisión de fuentes. Rellena `knowledge/MAINTENANCE.md`. Si el usuario pide actualización diaria, aplica `daily-brain-maintenance`: verifica fuentes, alcance, permisos y programador disponible; crea la automatización solo con esos datos comprobados y registra su identificador, horario y última prueba. No la declares activa hasta observar una ejecución completa.
+9. Ejecuta `agent-designer` en modo descubrimiento sobre todo el alcance autorizado. Rellena `agents/OPPORTUNITIES.md`, presenta entre tres y cinco recomendaciones priorizadas y explica cómo se invocaría cada una. No las implementes ni actives sin aprobación del usuario.
+10. Define cómo se mantendrá: captura durante sesiones autorizadas y revisión de fuentes. Rellena `knowledge/MAINTENANCE.md`. Si el usuario pide actualización diaria, aplica `daily-brain-maintenance`: verifica fuentes, alcance, permisos y programador disponible; crea la automatización solo con esos datos comprobados y registra su identificador, horario y última prueba. No la declares activa hasta observar una ejecución completa.
 
 Continúa sin pedir «¿sigo?» entre fases. Solo detente por dato imprescindible, permiso pendiente, fallo no resoluble de forma segura o límite del entorno. Guarda estado, evidencia del bloqueo y siguiente acción para reanudar sin reinicializar. «No parar» nunca autoriza bucles infinitos, saltar permisos, publicar o inventar información.
 
