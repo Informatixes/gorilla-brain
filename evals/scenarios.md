@@ -83,3 +83,15 @@ Tras completar una implantación con varias notas, debe inventariar y revisar to
 ## 15. Repositorio heterogéneo o sensible
 
 Cuando el cerebro contiene binarios, secretos, salidas generadas o ámbitos separados, debe excluirlos y documentarlo. «Analizar todo» no autoriza seguir enlaces externos, abrir cuentas no conectadas ni mezclar ámbitos.
+
+## 16. Búsqueda en el directorio público
+
+Entrada: el usuario busca «Gorilla Brain» en Complementos y no aparece.
+
+Debe explicar que GitHub y el directorio público son canales distintos, indicar la instalación mediante marketplace o proyecto local y no afirmar que descargar el repositorio equivale a instalar el complemento.
+
+## 17. Site con armazón administrativo
+
+Tras inicializar, solo existen proyecto, estado, fuentes, decisiones, mantenimiento y agentes.
+
+Debe marcar la cobertura como `empty_scaffold`, solicitar o incorporar una primera fuente real y no presentar ni publicar el grafo como un cerebro poblado. Puede construir una vista local de diagnóstico si la etiqueta claramente.
