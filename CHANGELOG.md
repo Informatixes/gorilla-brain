@@ -1,6 +1,7 @@
 ## 0.6.0 — 2026-11-13
 
 - Onboarding obligatorio que explica qué es Gorilla Brain, qué encontrará el usuario, cómo consultarlo, qué pasos realizará y qué accesos no obtiene por instalarlo.
+- Creación obligatoria del Bibliotecario al cerrar una implantación, con guía privada de invocación, pruebas y estados observables.
 - Flujo `daily-brain-maintenance` para actualizaciones idempotentes, trazables y limitadas a fuentes autorizadas.
 - Política de mantenimiento por implantación, registro diario, cursores por fuente y estados verificables de automatización.
 - Inicializador y pruebas ampliados con mantenimiento desactivado de forma segura por defecto.
