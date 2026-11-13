@@ -32,14 +32,9 @@
         ],
         "websiteURL": "https://innown.es",
         "defaultPrompt": [
-          "Configura mi segundo cerebro con Gorilla Brain.",
-          "Explícame qué encontraré y cómo usaré Gorilla Brain antes de instalarlo.",
-          "Continúa mi implantación desde el estado guardado.",
-          "Usa mi segundo cerebro para resolver esta tarea.",
-          "Genera el Site visual de mi segundo cerebro.",
-          "Crea un agente Bibliotecario que pueda consultar mi segundo cerebro.",
-          "Configura y verifica la actualización diaria de mi segundo cerebro.",
-          "Analiza todo mi segundo cerebro y propón agentes o complementos invocables para mis tareas repetidas."
+          "Configura mi segundo cerebro con Gorilla Brain y guíame paso a paso.",
+          "Usa mi segundo cerebro para resolver esta tarea y cita las notas fuente.",
+          "Analiza mi segundo cerebro y propón agentes o complementos para mis tareas repetidas."
         ]
       }
     }
