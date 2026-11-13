@@ -14,7 +14,8 @@ Antes de tocar archivos, Gorilla Brain debe explicar qué es, qué contiene, qu�
 4. creación o continuación de notas enlazadas con fuentes y estados;
 5. generación de la vista tipo Obsidian;
 6. prueba de una consulta con evidencia;
-7. configuración opcional del mantenimiento diario con fuentes y permisos comprobados.
+7. creación del agente Bibliotecario vinculado al repositorio y de su guía de invocación;
+8. prueba de uso y configuración opcional del mantenimiento diario con fuentes y permisos comprobados.
 
 Ejemplos de uso: «¿qué decidimos sobre este proyecto?», «relaciona estas notas», «enséñame la fuente», «¿qué está desactualizado?» o «incorpora este documento sin duplicarlo».
 
@@ -133,6 +134,12 @@ python -m http.server 4173 --bind 127.0.0.1 --directory site-dist
 ```
 
 La publicación debe ser privada por defecto. La carpeta compilada es una vista: las correcciones se realizan en Markdown y después se regenera.
+
+## Invocar el cerebro después de crearlo
+
+Cada implantación genera un Bibliotecario en `agents/BIBLIOTECARIO.md` y una guía adaptada en `agents/COMO-USAR-GORILLA-BRAIN.md`. El usuario no necesita conocer rutas técnicas para consultar: puede usar `@Gorilla Brain` cuando la interfaz admita menciones o pedir «Usa mi Gorilla Brain para…» dentro de un espacio con acceso al repositorio.
+
+El Bibliotecario empieza como `Diseñado`. Pasa a `Probado` tras superar consultas con evidencia, ausencia, contradicción, fuera de alcance y acción sensible. Solo se marca `Operativo` después de una invocación real y aceptación del responsable. En hosts sin subagentes, el complemento aplica el mismo flujo en la conversación actual y lo indica; no simula un proceso independiente.
 
 ## Actualización diaria
 
