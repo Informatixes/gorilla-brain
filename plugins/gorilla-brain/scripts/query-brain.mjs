@@ -93,7 +93,10 @@ for (const file of await markdownFiles(vault)) {
   const normalized = { title: normalize(note.title), path: normalize(relativePath), tags: normalize(note.metadata.tags || ""), body: normalize(note.body) };
   let score = 0;
   for (const term of queryTerms) score += count(normalized.title, term) * 10 + count(normalized.tags, term) * 6 + count(normalized.path, term) * 4 + count(normalized.body, term);
-  if (normalized.title.includes(normalize(query))) score += 20;
+  const normalizedQuery = normalize(query);
+  if (normalized.title.includes(normalizedQuery)) score += 20;
+  if (normalized.body.includes(normalizedQuery)) score += 15;
+  if (normalized.path.includes(normalizedQuery)) score += 10;
   if (score > 0) results.push({ path: relativePath, title: note.title, type: note.metadata.type || "note", status: note.metadata.status || "unknown", score, snippet: bestSnippet(note.body, queryTerms) });
 }
 

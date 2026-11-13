@@ -30,7 +30,7 @@ try {
 } catch (error) { if (error.code !== 'ENOENT') throw error; }
 const files = [
   ["PROJECT.md", "PROJECT.md"], ["STATE.md", "STATE.md"], ["AGENTS.md", "WORKSPACE.md"],
-  ["knowledge/CONTEXT.md", "CONTEXT.md"], ["knowledge/SOURCES.md", "SOURCES.md"], ["knowledge/DECISIONS.md", "DECISIONS.md"],
+  ["knowledge/CONTEXT.md", "CONTEXT.md"], ["knowledge/SOURCES.md", "SOURCES.md"], ["knowledge/DECISIONS.md", "DECISIONS.md"], ["knowledge/MAINTENANCE.md", "MAINTENANCE.md"],
   ["agents/AGENTS.md", "AGENTS.md"]
 ];
 const existing = [];
@@ -38,7 +38,7 @@ for (const [target] of [...files, ["brain.config.json"]]) try { await access(pat
 if (existing.length) { console.error(`No se sobrescribe una implantación existente: ${existing.join(", ")}`); process.exit(2); }
 const plan = { root, title: String(args.title), files: files.map(([target]) => target), apply: args.apply === true };
 if (args.apply !== true) { console.log(JSON.stringify(plan, null, 2)); process.exit(0); }
-for (const directory of ["knowledge", "projects", "processes", "people", "agents", "archive", "site"]) await mkdir(path.join(root, directory), { recursive: true });
+for (const directory of ["knowledge", "projects", "processes", "people", "agents", "daily", "archive", "site"]) await mkdir(path.join(root, directory), { recursive: true });
 for (const [target, template] of files) await copyFile(path.join(pluginRoot, "templates", template), path.join(root, target), constants.COPYFILE_EXCL);
-await writeFile(path.join(root, "brain.config.json"), `${JSON.stringify({ schemaVersion: 1, title: String(args.title), knowledgeRoot: ".", siteOutput: "site", sources: [{ type: "local", path: ".", readOnly: false }], separation: "one-private-repository-per-client" }, null, 2)}\n`, {encoding: "utf8", flag: "wx"});
+await writeFile(path.join(root, "brain.config.json"), `${JSON.stringify({ schemaVersion: 1, title: String(args.title), knowledgeRoot: ".", siteOutput: "site", sources: [{ type: "local", path: ".", readOnly: false }], maintenance: { status: "not_configured", schedule: null, timezone: null, lastSuccessfulRun: null }, separation: "one-private-repository-per-client" }, null, 2)}\n`, {encoding: "utf8", flag: "wx"});
 console.log(JSON.stringify({ ...plan, created: true }, null, 2));

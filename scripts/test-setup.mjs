@@ -15,6 +15,10 @@ try {
   run('init-brain.mjs', ['--root', vault, '--title', 'Persona ficticia', '--apply']);
   const guard = await readFile(path.join(vault, 'AGENTS.md'), 'utf8');
   if (!guard.includes('no sustituye')) throw new Error('Missing continuity limits');
+  const maintenance = await readFile(path.join(vault, 'knowledge/MAINTENANCE.md'), 'utf8');
+  if (!maintenance.includes('not_configured')) throw new Error('Missing maintenance policy');
+  const config = JSON.parse(await readFile(path.join(vault, 'brain.config.json'), 'utf8'));
+  if (config.maintenance?.status !== 'not_configured') throw new Error('Unexpected maintenance status');
   const context = path.join(vault, 'knowledge/CONTEXT.md');
   await writeFile(context, '# Contexto\n\nFuente: entrevista ficticia de prueba.\nLa entrega del proyecto ficticio Atlas es el 30 de noviembre.\n');
   run('init-brain.mjs', ['--root', vault, '--title', 'Otra', '--apply'], 2);
@@ -39,5 +43,5 @@ try {
   const alias = path.join(root, 'alias');
   await symlink(vault, alias, process.platform === 'win32' ? 'junction' : 'dir');
   run('build-site.mjs', ['--vault', vault, '--out', alias], 1);
-  console.log('Setup regression: foreign cwd, spaces, doctor, resume protection, positive/negative query, correction, rebuild, source and alias protection passed.');
+  console.log('Setup regression: foreign cwd, spaces, doctor, maintenance defaults, resume protection, positive/negative query, correction, rebuild, source and alias protection passed.');
 } finally { await rm(root, {recursive: true, force: true}); }
