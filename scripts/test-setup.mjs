@@ -15,6 +15,8 @@ try {
   run('init-brain.mjs', ['--root', vault, '--title', 'Persona ficticia', '--apply']);
   const guard = await readFile(path.join(vault, 'AGENTS.md'), 'utf8');
   if (!guard.includes('no sustituye')) throw new Error('Missing continuity limits');
+  const opportunities = await readFile(path.join(vault, 'agents/OPPORTUNITIES.md'), 'utf8');
+  if (!opportunities.includes('## Cobertura')) throw new Error('Missing opportunity analysis template');
   const maintenance = await readFile(path.join(vault, 'knowledge/MAINTENANCE.md'), 'utf8');
   if (!maintenance.includes('not_configured')) throw new Error('Missing maintenance policy');
   const config = JSON.parse(await readFile(path.join(vault, 'brain.config.json'), 'utf8'));
@@ -43,5 +45,5 @@ try {
   const alias = path.join(root, 'alias');
   await symlink(vault, alias, process.platform === 'win32' ? 'junction' : 'dir');
   run('build-site.mjs', ['--vault', vault, '--out', alias], 1);
-  console.log('Setup regression: foreign cwd, spaces, doctor, maintenance defaults, resume protection, positive/negative query, correction, rebuild, source and alias protection passed.');
+  console.log('Setup regression: foreign cwd, spaces, doctor, opportunity analysis template, maintenance defaults, resume protection, positive/negative query, correction, rebuild, source and alias protection passed.');
 } finally { await rm(root, {recursive: true, force: true}); }

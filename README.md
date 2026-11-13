@@ -4,6 +4,10 @@ Gorilla Brain convierte ChatGPT o Codex en un acompañante para construir, utili
 
 Desarrollado por [Innown](https://innown.es).
 
+## Antes de instalar
+
+Lee la [guía completa de primer uso](plugins/gorilla-brain/references/first-run.md). Explica las pantallas esperadas, la instalación desde GitHub, la separación entre código y datos, la carga de fuentes, los estados del Site y los problemas frecuentes.
+
 ## Qué encontrará al instalarlo
 
 Antes de tocar archivos, Gorilla Brain debe explicar qué es, qué contiene, qué consultas permite, cómo se usa, qué pasos realizará y qué accesos no obtiene por instalarse. La experiencia prevista es:
@@ -25,7 +29,9 @@ Ejemplos de uso: «¿qué decidimos sobre este proyecto?», «relaciona estas no
 - Separa hechos confirmados, decisiones, hipótesis y pendientes.
 - Limita cada fase a una única ronda de preguntas comprensibles para el usuario.
 - Propone la arquitectura técnica sin trasladar esas decisiones al cliente.
-- Diseña especialistas y un coordinador solo cuando existe contexto suficiente.
+- Analiza todo el repositorio autorizado para detectar tareas recurrentes, bloqueos y oportunidades.
+- Propone skills, agentes, automatizaciones o complementos invocables con evidencia, valor, esfuerzo y riesgo.
+- Diseña especialistas y un coordinador solo cuando existe contexto suficiente y aprobación.
 - Usa el segundo cerebro para resolver trabajo real sin volcar todo el repositorio en cada conversación.
 - Audita contradicciones, fuentes, permisos y vigencia.
 - Genera un Site visual tipo Obsidian desde cualquier repositorio Markdown.
@@ -41,24 +47,31 @@ Ejemplos de uso: «¿qué decidimos sobre este proyecto?», «relaciona estas no
 
 Esta distribución requiere un agente con lectura/escritura de archivos y ejecución local, más Node.js 20+. **No basta pegar la URL en un ChatGPT sin esas herramientas.** No obtiene toda la memoria o el historial de la cuenta y no se mantiene activo entre conversaciones por sí solo. Consulta [capacidades y límites](plugins/gorilla-brain/references/capabilities.md).
 
-La configuración debe continuar hasta un cerebro poblado, vista local y consultas verificadas, no solo carpetas vacías. Si el entorno no permite algo, informa el bloqueo y conserva el avance sin inventar éxito.
+La configuración debe continuar hasta un cerebro poblado, vista local y consultas verificadas, no solo carpetas vacías. Si solo existen notas administrativas, el estado es `empty_scaffold`: no debe presentarse ni publicarse como un cerebro útil. Si el entorno no permite algo, informa el bloqueo y conserva el avance sin inventar éxito.
 
 ## Instalación desde GitHub
 
-En un cliente que admita marketplaces y ejecución local de plugins, añade este repositorio como marketplace:
+Gorilla Brain todavía no aparece en el directorio público universal. Buscarlo en la pantalla general de Complementos no basta y pegar la URL en cualquier chat no demuestra que haya quedado instalado.
+
+Con Codex CLI disponible:
 
 ```text
-codex plugin marketplace add Informatixes/gorilla-brain
-codex plugin add gorilla-brain@gorilla-brain-marketplace
+codex plugin marketplace add Informatixes/gorilla-brain --ref main
+codex plugin marketplace list
 ```
 
-También puedes instalar **Gorilla Brain** desde el directorio de plugins. Después comienza con:
+Reinicia ChatGPT Desktop, abre **Complementos**, selecciona la fuente **Gorilla Brain by Innown** e instala **Gorilla Brain**. Si el comando `codex` no está disponible, descarga el repositorio, ábrelo como proyecto local, reinicia la aplicación y actualiza la pantalla de Complementos.
+
+Después comienza en un chat nuevo con:
 
 ```text
-Configura mi segundo cerebro con Gorilla Brain.
+Configura mi segundo cerebro con Gorilla Brain y guíame paso a paso.
 ```
 
-La disponibilidad de marketplaces basados en repositorios depende de la superficie y de las políticas del workspace. Consulta la [documentación oficial de plugins](https://developers.openai.com/plugins/build/plugins).
+El repositorio público contiene el código; los datos deben guardarse en otra carpeta privada. Consulta la [guía completa de primer uso](plugins/gorilla-brain/references/first-run.md) antes de incorporar información real.
+
+La disponibilidad de marketplaces depende de la superficie y de las políticas del workspace. Consulta la [documentación oficial de plugins](https://developers.openai.com/plugins/build/plugins).
+
 
 ## Uso recomendado
 
@@ -135,6 +148,20 @@ python -m http.server 4173 --bind 127.0.0.1 --directory site-dist
 
 La publicación debe ser privada por defecto. La carpeta compilada es una vista: las correcciones se realizan en Markdown y después se regenera.
 
+## Descubrir agentes y complementos útiles
+
+Después de poblar y probar el cerebro, Gorilla Brain recorre todas las notas dentro del alcance autorizado y genera `agents/OPPORTUNITIES.md`. El análisis busca tareas repetidas, consultas frecuentes, decisiones recurrentes, traspasos, revisiones periódicas, fuentes cambiantes, duplicidades y bloqueos.
+
+No todo necesita un agente. Para cada necesidad elige la solución mínima suficiente: instrucción, plantilla, skill, agente, automatización o complemento. Cada propuesta incluye evidencia, frecuencia, invocación, fuentes, permisos, salida, aprobaciones, valor, esfuerzo, riesgo y pruebas.
+
+Presenta primero entre tres y cinco oportunidades priorizadas. El análisis no activa nada por sí solo: el usuario decide cuáles se implementan. Puede repetirse cuando cambie materialmente el segundo cerebro.
+
+Ejemplo:
+
+```text
+@Gorilla Brain analiza todo mi segundo cerebro y propón agentes o complementos invocables para mis tareas repetidas.
+```
+
 ## Invocar el cerebro después de crearlo
 
 Cada implantación genera un Bibliotecario en `agents/BIBLIOTECARIO.md` y una guía adaptada en `agents/COMO-USAR-GORILLA-BRAIN.md`. El usuario no necesita conocer rutas técnicas para consultar: puede usar `@Gorilla Brain` cuando la interfaz admita menciones o pedir «Usa mi Gorilla Brain para…» dentro de un espacio con acceso al repositorio.
@@ -174,5 +201,5 @@ npm test
 
 ## Estado
 
-Versión `0.6.0`. Incluye el generador de Site, consulta verificable, experiencia visual de notas, diez skills, inicializador protegido y MCP local de solo lectura. Incluye el flujo de mantenimiento diario, pero no conecta por sí solo Google Drive, Gmail o Microsoft 365: cada fuente requiere identidad, permisos, alcance y una automatización verificadas en la implantación.
+Versión `0.7.0`. Incluye el generador de Site, consulta verificable, experiencia visual de notas, diez skills, inicializador protegido y MCP local de solo lectura. Incluye el flujo de mantenimiento diario, pero no conecta por sí solo Google Drive, Gmail o Microsoft 365: cada fuente requiere identidad, permisos, alcance y una automatización verificadas en la implantación.
 

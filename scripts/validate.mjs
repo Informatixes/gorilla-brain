@@ -26,11 +26,15 @@ check(/^[a-z0-9](?:[a-z0-9.-]{0,62}[a-z0-9])?$/.test(manifest.name), "plugin.jso
 check(/^\d+\.\d+\.\d+$/.test(manifest.version), "plugin.json: versión no SemVer");
 const shortDescription = manifest.extensions?.["com.openai"]?.interface?.shortDescription ?? "";
 check(shortDescription.length > 0 && shortDescription.length <= 30, "plugin.json: shortDescription debe tener entre 1 y 30 caracteres");
+const defaultPrompt = manifest.extensions?.["com.openai"]?.interface?.defaultPrompt;
+check(typeof defaultPrompt === "string" || (Array.isArray(defaultPrompt) && defaultPrompt.length >= 1 && defaultPrompt.length <= 3), "plugin.json: defaultPrompt debe ser texto o una lista de 1 a 3 elementos");
 const onboarding = manifest.extensions?.["com.openai"]?.onboardingSkill;
 check(typeof onboarding === "string" && onboarding.startsWith("./"), "plugin.json: onboardingSkill ausente o inválido");
 if (typeof onboarding === "string") {
   check(await exists(path.join(pluginRoot, onboarding)), "plugin.json: onboardingSkill no existe");
 }
+
+check(await exists(path.join(pluginRoot, "references", "first-run.md")), "Falta references/first-run.md");
 
 const mcpPath = path.join(pluginRoot, "mcp.json");
 check(await exists(mcpPath), "Falta mcp.json");
