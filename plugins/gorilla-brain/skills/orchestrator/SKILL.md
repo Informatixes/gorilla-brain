@@ -31,7 +31,7 @@ En cada turno:
 3. Registra evidencia, decisiones y pendientes.
 4. Actualiza `STATE.md`.
 5. Ejecuta la siguiente acción autorizada y repite el ciclo dentro de la misma tarea hasta completar el resultado operativo o encontrar un bloqueo real. No conviertas cada fase en una nueva petición al usuario.
-6. En una implantación nueva, incluye captura de información, HOME.md, Site local y verificación de consultas. Sigue el cierre operativo de la skill setup; carpetas vacías no bastan.
+6. En una implantación nueva, incluye captura de información, HOME.md, Site local, verificación de consultas y análisis de oportunidades en todo el alcance autorizado. Sigue el cierre operativo de la skill setup; carpetas vacías no bastan.
 
 ## Límite de preguntas
 
@@ -46,7 +46,8 @@ Cada fase admite como máximo una ronda conjunta de aclaraciones.
 
 - Nueva información o documentos: `knowledge-capture`.
 - Trabajo real que requiere contexto: `brain-operator`.
-- Diseño o revisión de especialistas: `agent-designer`.
+- Análisis transversal de necesidades y oportunidades: `agent-designer` en modo descubrimiento.
+- Diseño o revisión de especialistas aprobados: `agent-designer`.
 - Creación de un especialista que consulte el cerebro: `librarian-agent-factory`.
 - Consulta delegada con fuentes: `brain-librarian`.
 - Contradicciones, vigencia o calidad: `brain-auditor`.
