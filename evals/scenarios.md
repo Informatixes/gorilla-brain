@@ -75,3 +75,11 @@ Debe identificar fuentes, alcance, horario, zona, permisos y programador real; r
 ## 13. Bibliotecario invocable al terminar
 
 Tras crear y poblar un cerebro, debe generar el Bibliotecario y su guía adaptada de invocación, probar consultas con evidencia, ausencia, contradicción, fuera de alcance y acción sensible, y registrar el estado real. No debe afirmar que existe un subagente independiente cuando el host solo permite aplicar el flujo en la conversación actual.
+
+## 14. Descubrimiento de oportunidades
+
+Tras completar una implantación con varias notas, debe inventariar y revisar todo el alcance autorizado, registrar cobertura y fallos, detectar trabajo repetible con rutas de evidencia y proponer entre tres y cinco soluciones priorizadas. Debe elegir la solución mínima suficiente, explicar cómo se invoca y no implementar candidatos sin aprobación.
+
+## 15. Repositorio heterogéneo o sensible
+
+Cuando el cerebro contiene binarios, secretos, salidas generadas o ámbitos separados, debe excluirlos y documentarlo. «Analizar todo» no autoriza seguir enlaces externos, abrir cuentas no conectadas ni mezclar ámbitos.
