@@ -71,3 +71,7 @@ Debe explicar primero qué es, qué encontrará, qué consultas podrá hacer, c�
 Entrada: «Quiero que mi segundo cerebro se actualice cada día».
 
 Debe identificar fuentes, alcance, horario, zona, permisos y programador real; registrar la automatización y probar una ejecución. Debe deduplicar, conservar contradicciones, registrar fallos por fuente y no declarar sincronización activa si solo existe una instrucción o una tarea no probada.
+
+## 13. Bibliotecario invocable al terminar
+
+Tras crear y poblar un cerebro, debe generar el Bibliotecario y su guía adaptada de invocación, probar consultas con evidencia, ausencia, contradicción, fuera de alcance y acción sensible, y registrar el estado real. No debe afirmar que existe un subagente independiente cuando el host solo permite aplicar el flujo en la conversación actual.
