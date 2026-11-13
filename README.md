@@ -4,6 +4,20 @@ Gorilla Brain convierte ChatGPT o Codex en un acompañante para construir, utili
 
 Desarrollado por [Innown](https://innown.es).
 
+## Qué encontrará al instalarlo
+
+Antes de tocar archivos, Gorilla Brain debe explicar qué es, qué contiene, qué consultas permite, cómo se usa, qué pasos realizará y qué accesos no obtiene por instalarse. La experiencia prevista es:
+
+1. explicación breve del segundo cerebro y sus límites;
+2. comprobación del entorno y elección de una carpeta privada;
+3. una única ronda de preguntas sobre el caso de uso, las fuentes y la privacidad;
+4. creación o continuación de notas enlazadas con fuentes y estados;
+5. generación de la vista tipo Obsidian;
+6. prueba de una consulta con evidencia;
+7. configuración opcional del mantenimiento diario con fuentes y permisos comprobados.
+
+Ejemplos de uso: «¿qué decidimos sobre este proyecto?», «relaciona estas notas», «enséñame la fuente», «¿qué está desactualizado?» o «incorpora este documento sin duplicarlo».
+
 ## Qué hace
 
 - Crea un repositorio de conocimiento adaptado al usuario o a su organización.
@@ -120,6 +134,20 @@ python -m http.server 4173 --bind 127.0.0.1 --directory site-dist
 
 La publicación debe ser privada por defecto. La carpeta compilada es una vista: las correcciones se realizan en Markdown y después se regenera.
 
+## Actualización diaria
+
+Gorilla Brain incluye el flujo `daily-brain-maintenance` para revisar cambios, capturar solo conocimiento útil, evitar duplicados, conservar contradicciones y dejar un parte diario en `daily/YYYY-MM-DD.md`. Cada implantación registra fuentes, permisos, horario, cursor y resultados en `knowledge/MAINTENANCE.md`.
+
+La instalación no activa por sí sola una tarea permanente. Para considerarla operativa deben existir:
+
+- fuentes concretas y autorizadas;
+- acceso probado en el entorno que ejecutará la tarea;
+- horario y zona horaria;
+- automatización real creada en el host;
+- al menos una ejecución completa verificada.
+
+Cuando falte cualquiera de estos elementos, el estado debe permanecer `not_configured` o `pending`, nunca «sincronizado».
+
 ## Principios
 
 - El repositorio del cliente es la fuente de verdad.
@@ -139,5 +167,5 @@ npm test
 
 ## Estado
 
-Versión `0.5.1`. Incluye el generador de Site, consulta verificable, experiencia visual de notas, nueve skills, inicializador protegido y MCP local de solo lectura. No incluye sincronización automática con Google Drive o Microsoft 365: esas integraciones requieren configurar identidad, permisos y fuente autorizada en cada implantación.
+Versión `0.6.0`. Incluye el generador de Site, consulta verificable, experiencia visual de notas, diez skills, inicializador protegido y MCP local de solo lectura. Incluye el flujo de mantenimiento diario, pero no conecta por sí solo Google Drive, Gmail o Microsoft 365: cada fuente requiere identidad, permisos, alcance y una automatización verificadas en la implantación.
 
