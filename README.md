@@ -25,7 +25,9 @@ Ejemplos de uso: «¿qué decidimos sobre este proyecto?», «relaciona estas no
 - Separa hechos confirmados, decisiones, hipótesis y pendientes.
 - Limita cada fase a una única ronda de preguntas comprensibles para el usuario.
 - Propone la arquitectura técnica sin trasladar esas decisiones al cliente.
-- Diseña especialistas y un coordinador solo cuando existe contexto suficiente.
+- Analiza todo el repositorio autorizado para detectar tareas recurrentes, bloqueos y oportunidades.
+- Propone skills, agentes, automatizaciones o complementos invocables con evidencia, valor, esfuerzo y riesgo.
+- Diseña especialistas y un coordinador solo cuando existe contexto suficiente y aprobación.
 - Usa el segundo cerebro para resolver trabajo real sin volcar todo el repositorio en cada conversación.
 - Audita contradicciones, fuentes, permisos y vigencia.
 - Genera un Site visual tipo Obsidian desde cualquier repositorio Markdown.
@@ -135,6 +137,20 @@ python -m http.server 4173 --bind 127.0.0.1 --directory site-dist
 
 La publicación debe ser privada por defecto. La carpeta compilada es una vista: las correcciones se realizan en Markdown y después se regenera.
 
+## Descubrir agentes y complementos útiles
+
+Después de poblar y probar el cerebro, Gorilla Brain recorre todas las notas dentro del alcance autorizado y genera `agents/OPPORTUNITIES.md`. El análisis busca tareas repetidas, consultas frecuentes, decisiones recurrentes, traspasos, revisiones periódicas, fuentes cambiantes, duplicidades y bloqueos.
+
+No todo necesita un agente. Para cada necesidad elige la solución mínima suficiente: instrucción, plantilla, skill, agente, automatización o complemento. Cada propuesta incluye evidencia, frecuencia, invocación, fuentes, permisos, salida, aprobaciones, valor, esfuerzo, riesgo y pruebas.
+
+Presenta primero entre tres y cinco oportunidades priorizadas. El análisis no activa nada por sí solo: el usuario decide cuáles se implementan. Puede repetirse cuando cambie materialmente el segundo cerebro.
+
+Ejemplo:
+
+```text
+@Gorilla Brain analiza todo mi segundo cerebro y propón agentes o complementos invocables para mis tareas repetidas.
+```
+
 ## Invocar el cerebro después de crearlo
 
 Cada implantación genera un Bibliotecario en `agents/BIBLIOTECARIO.md` y una guía adaptada en `agents/COMO-USAR-GORILLA-BRAIN.md`. El usuario no necesita conocer rutas técnicas para consultar: puede usar `@Gorilla Brain` cuando la interfaz admita menciones o pedir «Usa mi Gorilla Brain para…» dentro de un espacio con acceso al repositorio.
@@ -174,5 +190,5 @@ npm test
 
 ## Estado
 
-Versión `0.6.0`. Incluye el generador de Site, consulta verificable, experiencia visual de notas, diez skills, inicializador protegido y MCP local de solo lectura. Incluye el flujo de mantenimiento diario, pero no conecta por sí solo Google Drive, Gmail o Microsoft 365: cada fuente requiere identidad, permisos, alcance y una automatización verificadas en la implantación.
+Versión `0.7.0`. Incluye el generador de Site, consulta verificable, experiencia visual de notas, diez skills, inicializador protegido y MCP local de solo lectura. Incluye el flujo de mantenimiento diario, pero no conecta por sí solo Google Drive, Gmail o Microsoft 365: cada fuente requiere identidad, permisos, alcance y una automatización verificadas en la implantación.
 
