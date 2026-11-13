@@ -1,6 +1,6 @@
 # Piloto de Gorilla Brain
 
-Esta guía deja una implantación preparada para una prueba controlada con un usuario. No incorpora datos reales ni concede accesos por sí sola.
+Para una primera instalación, lee antes la [guía de primer uso](plugins/gorilla-brain/references/first-run.md). Esta guía deja una implantación preparada para una prueba controlada con un usuario. No incorpora datos reales ni concede accesos por sí sola.
 
 ## 1. Condiciones previas
 
