@@ -4,6 +4,10 @@ Gorilla Brain convierte ChatGPT o Codex en un acompañante para construir, utili
 
 Desarrollado por [Innown](https://innown.es).
 
+## Antes de instalar
+
+Lee la [guía completa de primer uso](plugins/gorilla-brain/references/first-run.md). Explica las pantallas esperadas, la instalación desde GitHub, la separación entre código y datos, la carga de fuentes, los estados del Site y los problemas frecuentes.
+
 ## Qué encontrará al instalarlo
 
 Antes de tocar archivos, Gorilla Brain debe explicar qué es, qué contiene, qué consultas permite, cómo se usa, qué pasos realizará y qué accesos no obtiene por instalarse. La experiencia prevista es:
@@ -43,24 +47,31 @@ Ejemplos de uso: «¿qué decidimos sobre este proyecto?», «relaciona estas no
 
 Esta distribución requiere un agente con lectura/escritura de archivos y ejecución local, más Node.js 20+. **No basta pegar la URL en un ChatGPT sin esas herramientas.** No obtiene toda la memoria o el historial de la cuenta y no se mantiene activo entre conversaciones por sí solo. Consulta [capacidades y límites](plugins/gorilla-brain/references/capabilities.md).
 
-La configuración debe continuar hasta un cerebro poblado, vista local y consultas verificadas, no solo carpetas vacías. Si el entorno no permite algo, informa el bloqueo y conserva el avance sin inventar éxito.
+La configuración debe continuar hasta un cerebro poblado, vista local y consultas verificadas, no solo carpetas vacías. Si solo existen notas administrativas, el estado es `empty_scaffold`: no debe presentarse ni publicarse como un cerebro útil. Si el entorno no permite algo, informa el bloqueo y conserva el avance sin inventar éxito.
 
 ## Instalación desde GitHub
 
-En un cliente que admita marketplaces y ejecución local de plugins, añade este repositorio como marketplace:
+Gorilla Brain todavía no aparece en el directorio público universal. Buscarlo en la pantalla general de Complementos no basta y pegar la URL en cualquier chat no demuestra que haya quedado instalado.
+
+Con Codex CLI disponible:
 
 ```text
-codex plugin marketplace add Informatixes/gorilla-brain
-codex plugin add gorilla-brain@gorilla-brain-marketplace
+codex plugin marketplace add Informatixes/gorilla-brain --ref main
+codex plugin marketplace list
 ```
 
-También puedes instalar **Gorilla Brain** desde el directorio de plugins. Después comienza con:
+Reinicia ChatGPT Desktop, abre **Complementos**, selecciona la fuente **Gorilla Brain by Innown** e instala **Gorilla Brain**. Si el comando `codex` no está disponible, descarga el repositorio, ábrelo como proyecto local, reinicia la aplicación y actualiza la pantalla de Complementos.
+
+Después comienza en un chat nuevo con:
 
 ```text
-Configura mi segundo cerebro con Gorilla Brain.
+Configura mi segundo cerebro con Gorilla Brain y guíame paso a paso.
 ```
 
-La disponibilidad de marketplaces basados en repositorios depende de la superficie y de las políticas del workspace. Consulta la [documentación oficial de plugins](https://developers.openai.com/plugins/build/plugins).
+El repositorio público contiene el código; los datos deben guardarse en otra carpeta privada. Consulta la [guía completa de primer uso](plugins/gorilla-brain/references/first-run.md) antes de incorporar información real.
+
+La disponibilidad de marketplaces depende de la superficie y de las políticas del workspace. Consulta la [documentación oficial de plugins](https://developers.openai.com/plugins/build/plugins).
+
 
 ## Uso recomendado
 
