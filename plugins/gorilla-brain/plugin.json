@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "gorilla-brain",
-  "version": "0.6.0",
-  "description": "Construye, consulta y mantiene un segundo cerebro privado y verificable, con onboarding explicativo, conexiones entre notas, Site visual y mantenimiento diario controlado.",
+  "version": "0.7.0",
+  "description": "Construye y consulta un segundo cerebro privado, detecta necesidades reales y propone agentes, skills, automatizaciones o complementos invocables con evidencia.",
   "author": {
     "name": "Innown",
     "url": "https://innown.es"
@@ -24,7 +24,7 @@
       "interface": {
         "displayName": "Gorilla Brain",
         "shortDescription": "Segundo cerebro visual",
-        "longDescription": "Implanta un segundo cerebro propio, explica su funcionamiento antes de configurarlo, conserva conocimiento trazable y genera un Site navegable con búsqueda, backlinks y grafo 2D o 3D. Puede mantenerlo a diario cuando existen fuentes y automatización autorizadas y verificadas.",
+        "longDescription": "Implanta un segundo cerebro propio, conserva conocimiento trazable, genera un Site visual y analiza el repositorio autorizado para proponer agentes, skills, automatizaciones o complementos adaptados al trabajo cotidiano.",
         "developerName": "Innown",
         "category": "Productivity",
         "capabilities": [
@@ -38,7 +38,8 @@
           "Usa mi segundo cerebro para resolver esta tarea.",
           "Genera el Site visual de mi segundo cerebro.",
           "Crea un agente Bibliotecario que pueda consultar mi segundo cerebro.",
-          "Configura y verifica la actualización diaria de mi segundo cerebro."
+          "Configura y verifica la actualización diaria de mi segundo cerebro.",
+          "Analiza todo mi segundo cerebro y propón agentes o complementos invocables para mis tareas repetidas."
         ]
       }
     }
