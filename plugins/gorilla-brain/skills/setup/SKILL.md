@@ -7,6 +7,19 @@ description: Usa este flujo cuando una persona quiera crear, configurar, instala
 
 Convierte la realidad del usuario en un repositorio operativo. El usuario describe su trabajo; tú decides la arquitectura.
 
+## Primera respuesta obligatoria
+
+Antes de ejecutar comandos, pedir datos o crear archivos, explica en lenguaje claro y en este orden:
+
+1. **Qué es:** un segundo cerebro privado basado en archivos Markdown enlazados, consultable por personas y agentes, con una vista visual tipo Obsidian.
+2. **Qué encontrará:** notas, fuentes, decisiones, proyectos, personas, procesos, enlaces, backlinks, búsqueda, grafo y un registro del estado del sistema.
+3. **Qué podrá hacer:** consultar información conectada entre sí, localizar la evidencia de una respuesta, detectar contradicciones, recuperar decisiones y mantener contexto entre sesiones autorizadas.
+4. **Cómo se usa:** mediante preguntas naturales y peticiones concretas, por ejemplo «¿qué decidimos sobre este proyecto?», «relaciona estas notas», «¿qué está desactualizado?» o «incorpora esta fuente».
+5. **Qué se va a hacer:** comprobar capacidades, elegir una carpeta privada, crear o continuar la estructura, incorporar las primeras fuentes, generar el Site, probar una consulta y definir el mantenimiento.
+6. **Qué no ocurre por instalarlo:** no obtiene automáticamente el historial completo de ChatGPT, el correo, Drive o Microsoft 365; cada fuente requiere acceso, alcance y autorización verificables. La actualización diaria solo se considera activa cuando exista una automatización creada y probada.
+
+Adapta la extensión al contexto, pero no omitas estos seis puntos ni los sustituyas por una lista de comandos. Después continúa con las comprobaciones y la única entrevista inicial.
+
 ## Capacidad y rutas: comprobar antes de intentar ejecutar
 
 1. Comprueba si esta conversación dispone de lectura/escritura de archivos y ejecución de procesos. El MCP local es solo lectura: no basta para construir el cerebro. Si no hay ejecución, no repitas comandos fallidos ni declares instalado el sistema. Explica el bloqueo y el paso mínimo para abrir un espacio con ejecución local; continúa organizando la información disponible en la conversación sin fingir persistencia.
@@ -75,7 +88,7 @@ La inicialización solo crea plantillas. **No termines al completar discover ni 
 5. Abre la vista mediante servidor exclusivamente local, por ejemplo `python -m http.server 4173 --bind 127.0.0.1 --directory "<ruta-privada>/site"` si Python está disponible. Si no existe, usa el servidor local autorizado del entorno. Comprueba visualmente búsqueda, nota, fuente, enlaces y mapas. Si no puedes abrirla, marca esa prueba pendiente; no confundas build con prueba visual o publicación.
 6. Ejecuta `node "<raíz-absoluta-del-plugin>/scripts/query-brain.mjs" --vault "<ruta-privada>" --query "<pregunta-con-evidencia>"`; verifica la nota citada y luego prueba una pregunta sin evidencia. Una coincidencia de palabras no demuestra la respuesta: lee la nota antes de afirmar.
 7. Añade una corrección autorizada conservando el antecedente, regenera y verifica que se ve. Registra pasos repetibles y pruebas en STATE.md. No añadas una corrección inventada a datos reales para probar: usa un espacio ficticio separado.
-8. Define cómo se mantendrá: captura durante sesiones autorizadas y revisión de fuentes. No prometas actualización diaria ni en todos los chats sin una automatización realmente creada y acceso verificado.
+8. Define cómo se mantendrá: captura durante sesiones autorizadas y revisión de fuentes. Rellena `knowledge/MAINTENANCE.md`. Si el usuario pide actualización diaria, aplica `daily-brain-maintenance`: verifica fuentes, alcance, permisos y programador disponible; crea la automatización solo con esos datos comprobados y registra su identificador, horario y última prueba. No la declares activa hasta observar una ejecución completa.
 
 Continúa sin pedir «¿sigo?» entre fases. Solo detente por dato imprescindible, permiso pendiente, fallo no resoluble de forma segura o límite del entorno. Guarda estado, evidencia del bloqueo y siguiente acción para reanudar sin reinicializar. «No parar» nunca autoriza bucles infinitos, saltar permisos, publicar o inventar información.
 
