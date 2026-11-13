@@ -5,6 +5,10 @@
 - Propuestas priorizadas de instrucciones, skills, agentes, automatizaciones o complementos con evidencia, invocación, permisos, valor, esfuerzo y riesgo.
 - Nuevo artefacto `agents/OPPORTUNITIES.md`; las propuestas no se implementan ni activan sin aprobación.
 - Reevaluación cuando el repositorio cambia materialmente, evitando generar recomendaciones diarias sin novedades.
+- Guía completa de primer uso desde la pantalla de Complementos hasta un cerebro poblado y probado.
+- Distinción visible entre catálogo público, marketplace, checkout, repositorio privado y estados del Site.
+- Puerta `empty_scaffold` para impedir presentar o publicar como útil un Site formado solo por notas administrativas.
+- Manifiesto ajustado al máximo de tres prompts iniciales admitidos.
 
 ## 0.6.0 — 2026-11-13
 
