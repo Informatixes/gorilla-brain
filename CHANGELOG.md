@@ -1,3 +1,11 @@
+## 0.7.0 — 2026-11-13
+
+- Análisis transversal de todas las notas dentro del alcance autorizado al terminar la implantación.
+- Detección de tareas repetidas, decisiones recurrentes, revisiones, traspasos, bloqueos y fuentes cambiantes.
+- Propuestas priorizadas de instrucciones, skills, agentes, automatizaciones o complementos con evidencia, invocación, permisos, valor, esfuerzo y riesgo.
+- Nuevo artefacto `agents/OPPORTUNITIES.md`; las propuestas no se implementan ni activan sin aprobación.
+- Reevaluación cuando el repositorio cambia materialmente, evitando generar recomendaciones diarias sin novedades.
+
 ## 0.6.0 — 2026-11-13
 
 - Onboarding obligatorio que explica qué es Gorilla Brain, qué encontrará el usuario, cómo consultarlo, qué pasos realizará y qué accesos no obtiene por instalarlo.
