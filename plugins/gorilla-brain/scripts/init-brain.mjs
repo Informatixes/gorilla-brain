@@ -31,7 +31,7 @@ try {
 const files = [
   ["PROJECT.md", "PROJECT.md"], ["STATE.md", "STATE.md"], ["AGENTS.md", "WORKSPACE.md"],
   ["knowledge/CONTEXT.md", "CONTEXT.md"], ["knowledge/SOURCES.md", "SOURCES.md"], ["knowledge/DECISIONS.md", "DECISIONS.md"], ["knowledge/MAINTENANCE.md", "MAINTENANCE.md"],
-  ["agents/AGENTS.md", "AGENTS.md"]
+  ["agents/AGENTS.md", "AGENTS.md"], ["agents/OPPORTUNITIES.md", "AGENT_OPPORTUNITIES.md"]
 ];
 const existing = [];
 for (const [target] of [...files, ["brain.config.json"]]) try { await access(path.join(root, target), constants.COPYFILE_EXCL); existing.push(target); } catch {}
